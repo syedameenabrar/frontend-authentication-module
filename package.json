@@ -1,5 +1,5 @@
 {
-    {
+    
         "name": "frontend-authentication-module",
         "version": "1.0.0",
         "description": "A monorepo containing multiple Angular projects",
@@ -29,6 +29,6 @@
           "@angular/platform-browser-dynamic": "^14.15.0",
           "@angular/router": "^14.15.0"
         }
-      }
+      
       
 }
