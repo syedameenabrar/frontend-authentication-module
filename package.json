@@ -1,1 +1,34 @@
-{}
+{
+    {
+        "name": "frontend-authentication-module",
+        "version": "1.0.0",
+        "description": "A monorepo containing multiple Angular projects",
+        "license": "MIT",
+        "private": false,
+        "workspaces": [
+          "projects/*"
+        ],
+        "scripts": {
+          "start": "ng run frontend-authentication-module:serve",
+          "build": "ng run frontend-authentication-module:build",
+          "test": "ng run frontend-authentication-module:test",
+          "lint": "ng run frontend-authentication-module:lint"
+        },
+        "devDependencies": {
+          "@angular/cli": "^14.15.0",
+          "@angular/compiler-cli": "^14.15.0",
+          "@angular/language-service": "^14.15.0",
+          "@types/node": "^16.11.11",
+          "typescript": "~4.6.2"
+        },
+        "dependencies": {
+          "@angular/common": "^14.15.0",
+          "@angular/core": "^14.15.0",
+          "@angular/forms": "^14.15.0",
+          "@angular/platform-browser": "^14.15.0",
+          "@angular/platform-browser-dynamic": "^14.15.0",
+          "@angular/router": "^14.15.0"
+        }
+      }
+      
+}
