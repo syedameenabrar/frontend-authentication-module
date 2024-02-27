@@ -1,0 +1,131 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "sl-auth-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/sl-auth-app",
+      "sourceRoot": "projects/sl-auth-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sl-auth-app",
+            "index": "projects/sl-auth-app/src/index.html",
+            "main": "projects/sl-auth-app/src/main.ts",
+            "polyfills": "projects/sl-auth-app/src/polyfills.ts",
+            "tsConfig": "projects/sl-auth-app/tsconfig.app.json",
+            "assets": [
+              "projects/sl-auth-app/src/favicon.ico",
+              "projects/sl-auth-app/src/assets"
+            ],
+            "styles": [
+              "projects/sl-auth-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/sl-auth-app/src/environments/environment.ts",
+                  "with": "projects/sl-auth-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "sl-auth-app:build:production"
+            },
+            "development": {
+              "browserTarget": "sl-auth-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sl-auth-app/src/test.ts",
+            "polyfills": "projects/sl-auth-app/src/polyfills.ts",
+            "tsConfig": "projects/sl-auth-app/tsconfig.spec.json",
+            "karmaConfig": "projects/sl-auth-app/karma.conf.js",
+            "assets": [
+              "projects/sl-auth-app/src/favicon.ico",
+              "projects/sl-auth-app/src/assets"
+            ],
+            "styles": [
+              "projects/sl-auth-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "sl-auth-library": {
+      "projectType": "library",
+      "root": "projects/sl-auth-library",
+      "sourceRoot": "projects/sl-auth-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/sl-auth-library/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sl-auth-library/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/sl-auth-library/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sl-auth-library/src/test.ts",
+            "tsConfig": "projects/sl-auth-library/tsconfig.spec.json",
+            "karmaConfig": "projects/sl-auth-library/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+  
+}
