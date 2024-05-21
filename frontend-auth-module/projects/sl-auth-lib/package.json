@@ -1,0 +1,14 @@
+{
+  "name": "authentication_frontend_library",
+  "description": "In version 0.0.1 only login page with all the functionality is completed",
+  "version": "0.0.13",
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "elevate-dynamic-form": "^0.0.2"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

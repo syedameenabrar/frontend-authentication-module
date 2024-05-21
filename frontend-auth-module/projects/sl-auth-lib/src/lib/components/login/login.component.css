@@ -1,0 +1,174 @@
+/* 
+.login-container {
+  width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container h1 {
+  font-family: NotoSans-Regular;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 0px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+  width: 80%;
+  padding: 15px;
+  margin: 20px 0px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+.login-container button {
+  background-color: #832215;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.login-container button:hover {
+  background-color: #8C2E23;
+}
+
+.btn-disabled {
+  background-color: #cac7c1;
+  color: #000;
+}
+
+hr {
+  background: #8C2E23;
+  height: 4px;
+  width: 40%;
+  margin: 0 0 10px;
+  margin-bottom: 40px;
+}
+
+.forgotPass{
+  color: #8C2E23;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10%;
+    cursor: pointer;
+}
+
+
+.troubleInSingup{
+  color: #92949c;
+}
+
+.t-and-c{
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  text-align: center;
+} */
+
+
+
+
+/* Add this CSS to your global styles.css or component-specific CSS file */
+
+.login-container {
+  width: 80%; /* Adjust width as needed */
+  max-width: 400px; /* Set maximum width */
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container h1 {
+  font-family: NotoSans-Regular;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 0px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+  width: 100%; /* Adjust width to fill container */
+  padding: 15px;
+  margin: 20px 0px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+.login-container button {
+  background-color: #832215;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.login-container button:hover {
+  background-color: #8C2E23;
+}
+
+.btn-disabled {
+  /* text-transform: none; */
+  background-color: #cac7c1;
+  color: #000;
+}
+
+hr {
+  background: #8C2E23;
+  height: 4px;
+  width: 40%;
+  margin: 0 0 10px;
+  margin-bottom: 40px;
+}
+
+.forgotPass{
+  color: #8C2E23;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 10%;
+  cursor: pointer;
+}
+
+.troubleInSingup{
+  color: #92949c;
+}
+
+.t-and-c{
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+  .login-container {
+    width: 90%;
+    max-width: none;
+  }
+}
