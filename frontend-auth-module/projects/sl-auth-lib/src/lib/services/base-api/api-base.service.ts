@@ -12,7 +12,6 @@ export class ApiBaseService {
   constructor(public http: HttpClient) {
   }
 
-
   get<T>(baseURL:string, url: string, params?: HttpParams): Observable<T> {
     return this.http.get<T>(baseURL + url, { params });
   }

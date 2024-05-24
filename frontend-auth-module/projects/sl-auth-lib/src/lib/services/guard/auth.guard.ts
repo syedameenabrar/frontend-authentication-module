@@ -14,13 +14,11 @@ export class AuthGuard implements CanActivate {
     const isAuthenticated = !!localStorage.getItem('name');
     if (isAuthenticated) {
       if (state?.url === '/login') {
-        return this.router.parseUrl('/home'); // Redirect authenticated users trying to access login to home
+        return this.router.parseUrl('/home');
       }
-      return true; // Allow navigation for authenticated users
+      return true;
     } else {
-      // Redirect unauthenticated users to the login page
       return this.router.parseUrl('/login'); 
-      // return false
     }
   }
 }

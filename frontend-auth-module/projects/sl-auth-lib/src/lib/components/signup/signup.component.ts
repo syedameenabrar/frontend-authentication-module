@@ -3,7 +3,6 @@ import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
-
 @Component({
   selector: 'lib-signup',
   templateUrl: './signup.component.html',
@@ -15,7 +14,6 @@ export class SignupComponent {
   endPointService:EndpointService;
   router:Router;
   configData:any;
-
 
   formJson: any = {
     controls: [

@@ -16,7 +16,6 @@ export class LoginComponent {
   router:Router;
   configData:any;
 
-
   formJson: any = {
     controls: [
       {

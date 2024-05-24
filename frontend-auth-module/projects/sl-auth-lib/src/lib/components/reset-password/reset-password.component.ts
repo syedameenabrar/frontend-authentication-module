@@ -89,7 +89,6 @@ export class ResetPasswordComponent {
     }
   }
   
-
   submitData() {
     this.baseApiService
       .post(

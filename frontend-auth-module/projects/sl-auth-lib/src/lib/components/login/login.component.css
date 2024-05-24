@@ -24,7 +24,7 @@
 .login-container input[type="text"],
 .login-container input[type="password"],
 .login-container button {
-  width: 100%; /* Adjust width to fill container */
+  width: 100%;
   padding: 15px;
   margin: 20px 0px;
   border: 1px solid #ccc;
@@ -78,7 +78,6 @@ hr {
   text-align: center;
 }
 
-/* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
   .login-container {
     width: 90%;
