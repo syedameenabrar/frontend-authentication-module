@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 
 @Component({
-  selector: 'lib-signup',
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  selector: 'lib-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.css'
 })
-export class SignupComponent {
+export class ResetPasswordComponent {
   @ViewChild('formLib') formLib: MainFormComponent | undefined;
   baseApiService: ApiBaseService;
   endPointService:EndpointService;
@@ -19,20 +19,6 @@ export class SignupComponent {
 
   formJson: any = {
     controls: [
-      {
-        name: 'name',
-        label: 'Name',
-        value: '',
-        class: 'ion-no-margin',
-        type: 'text',
-        position: 'floating',
-        errorMessage:{
-          required: "Enter Name"
-        },
-        validators: {
-          required: true
-        },
-      },
       {
         name: 'email',
         label: 'Email',
@@ -107,7 +93,7 @@ export class SignupComponent {
   submitData() {
     this.baseApiService
       .post(
-        this.configData?.baseUrl,this.configData?.loginApiPath,this.formLib?.myForm.value)
+        this.configData?.baseUrl,this.configData?.resetPasswordApiPath,this.formLib?.myForm.value)
       .subscribe((res: any) => {
         if (res?.message == "User logged in successfully.") {
           alert(res?.message);

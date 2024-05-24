@@ -9,6 +9,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { SolutionComponent } from './components/solution/solution.component';
 import { ObservationComponent } from './components/observation/observation.component';
 import { HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
     declarations: [
         AppComponent,
@@ -28,7 +29,8 @@ import { HttpClient } from '@angular/common/http';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        SlAuthLibModule
+        SlAuthLibModule,
+        BrowserAnimationsModule
     ]
 })
 export class AppModule { }

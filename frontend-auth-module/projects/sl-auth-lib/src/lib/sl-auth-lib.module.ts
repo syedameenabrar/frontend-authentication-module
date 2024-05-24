@@ -6,12 +6,16 @@ import { SlRoutingRoutingModule } from './sl-routing-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { DynamicFormModule } from 'elevate-dynamic-form';
+import { LandingComponent } from './components/landing/landing.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     SlAuthLibComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LandingComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
