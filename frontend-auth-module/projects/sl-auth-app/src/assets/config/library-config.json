@@ -5,8 +5,8 @@
     "redirectRouteOnLoginSuccess": "observation",
     "loginApiPath": "/user/v1/account/login",
     "signUpApiPath": "/elevate-interface/v2/account/create",
-    "resetPasswordApiPath": "/elevate-interface/v2/account/reser-password",
-    "otpValidationApiPath": "/elevate-interface/v2/account/otp-validation",
+    "resetPasswordApiPath": "/elevate-user/v1/account/resetPassword",
+    "otpValidationApiPath": "/elevate-user/v1/account/generateOtp",
     "supportEmail":"mentoredtest1@yopmail.com",
     "privacyPolicyUrl":"https://www.privacyploicy.com",
     "termOfUseUrl":"https://www.termsofuse.com"

@@ -9,13 +9,14 @@ import { DynamicFormModule } from 'elevate-dynamic-form';
 import { LandingComponent } from './components/landing/landing.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import { OtpComponent } from './components/otp/otp.component';
 @NgModule({
   declarations: [
     SlAuthLibComponent,
     LoginComponent,
     SignupComponent,
     LandingComponent,
+    OtpComponent,
     ResetPasswordComponent
   ],
   imports: [

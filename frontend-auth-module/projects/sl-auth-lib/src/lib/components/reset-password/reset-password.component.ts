@@ -52,7 +52,7 @@ export class ResetPasswordComponent {
         },
       },
       {
-        name: 'password',
+        name: 'confirm-password',
         label: 'Confirm Password',
         value: '',
         class: 'ion-margin',
