@@ -1,3 +1,19 @@
-<p>otp works!</p>
-<ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)">
-</ngx-otp-input>
+<div class="header">
+    <a routerLink="/Signup" class="back-arrow">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+</div>
+
+<div class="login-container">
+    <h1>Verify account</h1>
+    <div class="d-flex bottom-margin">
+      <hr>
+    </div>
+
+
+      <button type="button" (click)="generateOtp()" class="signUpButton" *ngIf="!otpInput; else otpScreen">Generate OTP</button>
+      <ng-template #otpScreen>
+        <ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)">
+        </ngx-otp-input>
+      </ng-template>
+  </div>
