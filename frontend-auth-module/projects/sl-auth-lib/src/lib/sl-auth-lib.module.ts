@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { DynamicFormModule } from 'elevate-dynamic-form';
 import { LandingComponent } from './components/landing/landing.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     CommonModule,
     SlRoutingRoutingModule,
     DynamicFormModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   exports: [
     SlAuthLibComponent,

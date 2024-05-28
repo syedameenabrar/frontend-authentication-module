@@ -1,3 +1,8 @@
+<div class="header">
+    <a routerLink="/landing" class="back-arrow">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+</div>
 <div class="login-container">
     <h1>Signup to {{configData?.projectName}}</h1>
     <div class="d-flex bottom-margin">
@@ -6,7 +11,7 @@
     <form>
         <dynamic-form [formJson]="formJson.controls" #formLib></dynamic-form>
         <button type="button" [disabled]="formLib?.myForm?.invalid"
-            [ngClass]="{'btn-disabled': formLib?.myForm?.invalid}" (click)="submitData()">Sign Up</button>
+            [ngClass]="{'btn-disabled': formLib?.myForm?.invalid}" (click)="submitData()">Validate OTP</button>
     </form>
-    <h5 class="loginRoute">Have an account already? <br> <a routerLink="/login">Login</a></h5>
+    <p class="loginRoute">Have an account already? <br> <a routerLink="/login">Login</a></p>
 </div>

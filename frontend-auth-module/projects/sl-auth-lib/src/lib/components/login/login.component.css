@@ -1,3 +1,41 @@
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-arrow {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.back-arrow mat-icon {
+  font-size: 24px; 
+}
+
+.sign-up-button {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  color: #8C2E23;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: none;
+  text-decoration: none;
+}
+
 .login-container {
   width: 80%;
   max-width: 400px;
@@ -5,7 +43,7 @@
   background-color: #fff;
   text-align: center;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

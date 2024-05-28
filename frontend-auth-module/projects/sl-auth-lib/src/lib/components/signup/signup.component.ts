@@ -105,7 +105,7 @@ export class SignupComponent {
   submitData() {
     this.baseApiService
       .post(
-        this.configData?.baseUrl,this.configData?.loginApiPath,this.formLib?.myForm.value)
+        this.configData?.baseUrl,this.configData?.signUpApiPath,this.formLib?.myForm.value)
       .subscribe((res: any) => {
         if (res?.message == "User logged in successfully.") {
           alert(res?.message);
