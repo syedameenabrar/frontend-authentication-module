@@ -10,6 +10,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatIconModule } from '@angular/material/icon';
 import { OtpComponent } from './components/otp/otp.component';
+import { NgxOtpInputModule } from "ngx-otp-input";
 @NgModule({
   declarations: [
     SlAuthLibComponent,
@@ -24,7 +25,8 @@ import { OtpComponent } from './components/otp/otp.component';
     SlRoutingRoutingModule,
     DynamicFormModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    NgxOtpInputModule
   ],
   exports: [
     SlAuthLibComponent,

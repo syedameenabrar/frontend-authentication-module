@@ -8,6 +8,7 @@
     "elevate-dynamic-form": "^0.0.2"
   },
   "dependencies": {
+    "ngx-otp-input": "^0.11.4",
     "tslib": "^2.3.0"
   },
   "sideEffects": false
