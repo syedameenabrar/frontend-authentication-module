@@ -51,15 +51,21 @@ SlAuthLibModule
 
 {
 "projectName": "your projectName",
+"landingPageTitle": "Create account to connect, solve & share.",
 "baseUrl": "https://yourBaseUrl.com",
 "redirectRouteOnLoginSuccess": "home",
 "loginApiPath": "/user/v1/account/login",
 "signUpApiPath": "/user/v1/account/signup",
-"supportEmail":"test@yopmail.com",
-"privacyPolicyUrl":"www.privacyploicy.com",
-"termOfUseUrl":"www.termsofuse.com"
+"resetPasswordApiPath": "/v2/account/reser-password",
+"otpValidationApiPath": "/v2/account/otp-validation",
+"supportEmail":"mentoredtest1@yopmail.com",
+"privacyPolicyUrl":"https://www.privacyploicy.com",
+"termOfUseUrl":"https://www.termsofuse.com"
 }
 
+
+   
+   
 
 -----------------------------------------------------------------------------------
 

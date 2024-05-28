@@ -1,6 +1,6 @@
 .login-container {
     width: 80%; 
-    max-width: 600px; 
+    max-width: 500px; 
     padding: 20px;
     background-color: #fff;
     text-align: center;
@@ -12,7 +12,7 @@
   
   .login-container h1 {
     font-family: NotoSans-Regular;
-    font-size: 30px;
+    font-size: 28px;
     font-style: normal;
     font-weight: 700;
     line-height: 36px;
@@ -26,7 +26,7 @@
   .login-container button {
     width: 100%;
     padding: 15px;
-    margin: 20px 0px;
+    /* margin: 20px 0px; */
     border: 1px solid #ccc;
     border-radius: 40px;
     box-sizing: border-box;
@@ -53,17 +53,18 @@
   
   hr {
     background: #8C2E23;
+    border: none;
     height: 4px;
     width: 40%;
     margin: 0 0 10px;
     margin-bottom: 40px;
   }
   
-  .forgotPass{
-    color: #8C2E23;
+  .haveAccountAlready{
+    color: #000000;
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 10%;
+    /* margin-bottom: 10%; */
     cursor: pointer;
   }
   
@@ -77,6 +78,30 @@
     font-size: 13px;
     text-align: center;
   }
+
+  .or-section{
+    display: flex;
+    justify-content: center;
+    margin: 60px 0px;
+}
+
+.or-section p{
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid gray;
+  line-height: .1em;
+  margin: 10px 0;
+}
+
+.or-section p span {
+  background: #fff;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+.signUpButton{
+  margin-top: 40px;
+}
   
   @media screen and (max-width: 768px) {
     .login-container {
