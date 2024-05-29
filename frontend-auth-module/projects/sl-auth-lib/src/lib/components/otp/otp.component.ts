@@ -28,7 +28,7 @@ export class OtpComponent {
   }
 
   otpInputConfig: NgxOtpInputConfig = {
-    otpLength: 4,
+    otpLength: 6,
     autofocus: true,
     classList: {
       inputBox: "my-super-box-class",

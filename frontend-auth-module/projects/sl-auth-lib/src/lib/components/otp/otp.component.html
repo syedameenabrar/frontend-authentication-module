@@ -15,5 +15,13 @@
       <ng-template #otpScreen>
         <ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)">
         </ngx-otp-input>
+        <p>You will receive an OTP on your registered email address.</p>
+        <div class="">
+            <input type="checkbox" name="" id="">
+            <h5>By continuing, you agree to accept our Privacy Policy & Terms of Service</h5>
+        </div>
+      <button type="button" (click)="generateOtp()" class="">Verify and login</button>
+      <p class="loginRoute"><br> <a >Resend OTP</a></p>
+
       </ng-template>
   </div>

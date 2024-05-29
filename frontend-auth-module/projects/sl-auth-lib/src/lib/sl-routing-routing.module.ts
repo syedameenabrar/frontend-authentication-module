@@ -8,11 +8,11 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { OtpComponent } from './components/otp/otp.component';
 
 const routes: Routes = [
-  {path:'login', component: LoginComponent },
-  {path:'signup', component: SignupComponent},
-  {path:'landing', component: LandingComponent},
-  {path:'reset-password', component: ResetPasswordComponent},
-  {path:'otp', component: OtpComponent},
+  {path:'login', component: LoginComponent, canActivate:[AuthGuard] },
+  {path:'signup', component: SignupComponent, canActivate:[AuthGuard] },
+  {path:'landing', component: LandingComponent, canActivate:[AuthGuard] },
+  {path:'reset-password', component: ResetPasswordComponent, canActivate:[AuthGuard] },
+  {path:'otp', component: OtpComponent, canActivate:[AuthGuard] },
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: '**', redirectTo: '/landing', pathMatch: 'full' }
 ];

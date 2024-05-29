@@ -11,6 +11,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { MatIconModule } from '@angular/material/icon';
 import { OtpComponent } from './components/otp/otp.component';
 import { NgxOtpInputModule } from "ngx-otp-input";
+import { AuthGuard } from './services/guard/auth.guard';
 @NgModule({
   declarations: [
     SlAuthLibComponent,
@@ -31,6 +32,7 @@ import { NgxOtpInputModule } from "ngx-otp-input";
   exports: [
     SlAuthLibComponent,
     SlRoutingRoutingModule
-  ]
+  ],
+  providers:[AuthGuard]
 })
 export class SlAuthLibModule { }
