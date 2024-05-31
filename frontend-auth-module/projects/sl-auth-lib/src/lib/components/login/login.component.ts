@@ -3,6 +3,8 @@ import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'lib-login',
@@ -15,6 +17,7 @@ export class LoginComponent {
   endPointService:EndpointService;
   router:Router;
   configData:any;
+  location:Location;
 
   formJson: any = {
     controls: [
@@ -58,6 +61,7 @@ export class LoginComponent {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
+    this.location= inject(Location);
   }
 
   ngOnInit() {
@@ -109,5 +113,9 @@ export class LoginComponent {
       alert(err?.error?.message);
     }
     );
+  }
+
+  navigateBack() {
+    this.location.back();
   }
 }

@@ -1,17 +1,16 @@
 <div class="login-container">
-    <h1>{{configData?.landingPageTitle}}</h1>
-    <div class="d-flex bottom-margin">
-      <hr>
-    </div>
-      <button type="button" routerLink="/signup" class="signUpButton">Sign Up</button>
-
-      <section class="section-config or-section">
-        <p>
-          <span>OR</span>
-        </p>
-      </section>
-
-    <h5 class="haveAccountAlready">Have an account already?</h5>
-
-    <button type="button" routerLink="/login">Login</button>
+  <h1>{{configData?.landingPageTitle}}</h1>
+  <div class="d-flex bottom-margin">
+    <hr>
   </div>
+  <button type="button" routerLink="/signup" class="signUpButton">
+    <mat-icon>email</mat-icon><span>Sign Up</span>
+  </button>
+  <section class="section-config or-section">
+    <p><span>OR</span></p>
+  </section>
+  <h5 class="haveAccountAlready">Have an account already?</h5>
+  <button type="button" routerLink="/login">
+    <mat-icon>email</mat-icon><span>Login</span>
+  </button>
+</div>

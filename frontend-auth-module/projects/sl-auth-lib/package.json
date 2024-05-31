@@ -5,10 +5,10 @@
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
-    "elevate-dynamic-form": "^0.0.2"
+    "elevate-dynamic-form": "^0.0.8",
+    "ngx-otp-input": "^0.11.4"
   },
   "dependencies": {
-    "ngx-otp-input": "^0.11.4",
     "tslib": "^2.3.0"
   },
   "sideEffects": false

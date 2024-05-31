@@ -3,6 +3,9 @@ import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
+import { Location } from '@angular/common';
+import { StateService } from '../../services/state/state.service';
+import { PasswordMatchValidator } from '../password-match.validator';
 @Component({
   selector: 'lib-signup',
   templateUrl: './signup.component.html',
@@ -11,9 +14,10 @@ import { MainFormComponent } from 'elevate-dynamic-form';
 export class SignupComponent {
   @ViewChild('formLib') formLib: MainFormComponent | undefined;
   baseApiService: ApiBaseService;
-  endPointService:EndpointService;
-  router:Router;
-  configData:any;
+  endPointService: EndpointService;
+  router: Router;
+  configData: any;
+  location:Location;
 
   formJson: any = {
     controls: [
@@ -24,7 +28,7 @@ export class SignupComponent {
         class: 'ion-no-margin',
         type: 'text',
         position: 'floating',
-        errorMessage:{
+        errorMessage: {
           required: "Enter Name"
         },
         validators: {
@@ -38,9 +42,9 @@ export class SignupComponent {
         class: 'ion-no-margin',
         type: 'text',
         position: 'floating',
-        errorMessage:{
+        errorMessage: {
           required: "Please enter registered email ID",
-          email:"Enter a valid email ID"
+          email: "Enter a valid email ID"
         },
         validators: {
           required: true,
@@ -54,39 +58,42 @@ export class SignupComponent {
         class: 'ion-margin',
         type: 'password',
         position: 'floating',
-        errorMessage:{
+        errorMessage: {
           required: "Enter password",
-          minlength: "Password should contain minimum of 8 characters"
+          minlength: "Password should contain minimum of 10 characters",
+          pattern:"Password must have at least one uppercase letter, one number, one special character, and be at least 10 characters long"
         },
         validators: {
           required: true,
-          minLength: 8,
+          minLength: 10,
+          pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/
         },
       },
       {
-        name: 'confirm-password',
+        name: 'confirm_password',
         label: 'Confirm Password',
         value: '',
         class: 'ion-margin',
         type: 'password',
         position: 'floating',
-        errorMessage:{
+        errorMessage: {
           required: "Re-enter password",
-          minlength: "Password should contain minimum of 8 characters"
+          minlength: "Password should contain minimum of 10 characters"
         },
         validators: {
           required: true,
-          minLength: 8,
+          minLength: 10,
         },
       },
     ],
   };
 
 
-  constructor() { 
+  constructor(private stateService: StateService) {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
+    this.location= inject(Location);
   }
 
   ngOnInit() {
@@ -100,29 +107,23 @@ export class SignupComponent {
       console.error("An error occurred while fetching configData:", error);
     }
   }
-  
 
-  submitData() {
-let formData = this.formLib?.myForm.value
-    let payload = {
-      email: formData?.email,
-      password:formData?.password
-    }
 
-    this.baseApiService
-      .post(
-        this.configData?.baseUrl,this.configData?.otpValidationApiPath,payload)
-      .subscribe((res: any) => {
-        if (res?.message == "OTP has been sent to your registered email ID. Please enter the number to update your password.") {
-          alert(res?.message);
-          this.router.navigateByUrl('/otp');
-        } else {
-          alert(res?.message);
-        }
-      },
-    (err:any) => {
-      alert(err?.error?.message);
+  navigateToGenerateOtpPage() {
+    const formData = this.formLib?.myForm.value
+    const passwordsMatch = formData.password === formData.confirm_password;
+    if (passwordsMatch) {
+      formData.fromPage = 'signup';
+      this.stateService.setData(formData);
+      this.router.navigate(['/otp']);
+    } else {
+      alert("Please enter same password");
+      console.error('Please enter same password');
     }
-    );
+ }
+
+  navigateBack() {
+    this.location.back();
   }
+  
 }

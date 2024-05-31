@@ -1,27 +1,31 @@
 <div class="header">
-    <a routerLink="/Signup" class="back-arrow">
-        <mat-icon>arrow_back</mat-icon>
-    </a>
+  <a (click)="navigateBack()" class="back-arrow">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
 </div>
 
 <div class="login-container">
-    <h1>Verify account</h1>
-    <div class="d-flex bottom-margin">
-      <hr>
-    </div>
-
-
-      <button type="button" (click)="generateOtp()" class="signUpButton" *ngIf="!otpInput; else otpScreen">Generate OTP</button>
-      <ng-template #otpScreen>
-        <ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)">
-        </ngx-otp-input>
-        <p>You will receive an OTP on your registered email address.</p>
-        <div class="">
-            <input type="checkbox" name="" id="">
-            <h5>By continuing, you agree to accept our Privacy Policy & Terms of Service</h5>
-        </div>
-      <button type="button" (click)="generateOtp()" class="">Verify and login</button>
-      <p class="loginRoute"><br> <a >Resend OTP</a></p>
-
-      </ng-template>
+  <h1>Verify account</h1>
+  <div class="d-flex bottom-margin">
+    <hr>
   </div>
+  <button type="button" (click)="generateOTP()" class="signUpButton" *ngIf="!otpInput; else otpScreen">Generate OTP</button>
+  <ng-template #otpScreen>
+    <div class="ngx-otp-input-wrapper">
+      <ngx-otp-input [config]="otpInputConfig" (fill)="handleFillEvent($event)"></ngx-otp-input>
+    </div>
+    <p>You will receive an OTP on your registered email address.</p>
+    <div class="terms">
+      <input type="checkbox" name="terms" [(ngModel)]="checkbox" id="terms-checkbox">
+      <h6>By continuing, you agree to accept our <a [href]="configData?.privacyPolicyUrl"
+        target="_blank">Privacy Policy</a> & <a [href]="configData?.termOfUseUrl" target="_blank">Terms of
+        Service</a></h6>
+    </div>
+    <button type="button" [disabled]="!otp || !checkbox" [ngClass]="{'btn-disabled': !otp || !checkbox}" (click)="verifyOTP()" class="">Verify and login</button>
+    <p *ngIf="timeLeft > 0">Try again after {{ timeLeft }} seconds.
+    </p>
+    <p [ngClass]="{'resetBtn-disabled': timeLeft > 0}" class="loginRoute">
+      <a (click)=" timeLeft <= 0 ? generateOTP():false"  >Resend OTP</a>
+    </p>
+  </ng-template>
+</div>

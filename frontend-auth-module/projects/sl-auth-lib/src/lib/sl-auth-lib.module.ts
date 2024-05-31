@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { OtpComponent } from './components/otp/otp.component';
 import { NgxOtpInputModule } from "ngx-otp-input";
 import { AuthGuard } from './services/guard/auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     SlAuthLibComponent,
@@ -27,7 +28,9 @@ import { AuthGuard } from './services/guard/auth.guard';
     DynamicFormModule,
     HttpClientModule,
     MatIconModule,
-    NgxOtpInputModule
+    NgxOtpInputModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     SlAuthLibComponent,
