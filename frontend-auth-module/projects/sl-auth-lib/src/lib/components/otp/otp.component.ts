@@ -19,7 +19,7 @@ export class OtpComponent {
   otpInput: boolean = false;
   regFormData: any;
   otp!: any;
-  checkbox:boolean = false;
+  checkbox: boolean = false;
 
   baseApiService: ApiBaseService;
   router: Router;
@@ -35,11 +35,6 @@ export class OtpComponent {
   ngOnInit() {
     this.startTimer();
     this.regFormData = this.stateService.getData();
-    if (this.regFormData) {
-      console.log('Received state data:', this.regFormData);
-    } else {
-      console.error('No state data found');
-    }
     this.fetchConfigData();
   }
 
@@ -53,7 +48,7 @@ export class OtpComponent {
 
   otpInputConfig: NgxOtpInputConfig = {
     otpLength: 6,
-    autofocus: true,
+    autofocus: true
   };
 
 
@@ -73,23 +68,29 @@ export class OtpComponent {
   }
 
   generateOTP() {
-    console.log(this.regFormData)
     let payload = {
       email: this.regFormData?.email,
       password: this.regFormData?.password,
       name: this.regFormData?.name,
     }
 
-    let selectedApiPath: string;
-    if (this.regFormData.fromPage === "signup") {
-      selectedApiPath = "otpGenerationApiPathForRegistration"
-    } else if (this.regFormData.fromPage === "reset") {
-      selectedApiPath = "otpGenerationApiPathForResetPassword"
-      delete payload.name;
-    }
-    else {
-      selectedApiPath = "";
-    }
+    // let selectedApiPath: string;
+    // if (this.regFormData.fromPage === "signup") {
+    //   selectedApiPath = "otpGenerationApiPathForRegistration"
+    // } else if (this.regFormData.fromPage === "reset") {
+    //   selectedApiPath = "otpGenerationApiPathForResetPassword"
+    //   delete payload.name;
+    // }
+    // else {
+    //   selectedApiPath = "";
+    // }
+
+
+    let selectedApiPath: string = this.regFormData.fromPage === "signup"
+      ? "otpGenerationApiPathForRegistration"
+      : this.regFormData.fromPage === "reset"
+        ? (delete payload.name, "otpGenerationApiPathForResetPassword")
+        : "";
 
     this.baseApiService
       .post(
@@ -140,6 +141,48 @@ export class OtpComponent {
         }
       );
   }
+
+  processOTP(action: 'generate' | 'verify') {
+    let payload = {
+      email: this.regFormData?.email,
+      password: this.regFormData?.password,
+      name: this.regFormData?.name,
+      otp: action === 'verify' ? this.otp : undefined
+    };
+  
+    let selectedApiPath: string;
+    let reditectionPath: string | undefined;
+  
+    if (this.regFormData.fromPage === "signup") {
+      selectedApiPath = action === 'generate' ? "otpGenerationApiPathForRegistration" : "signUpApiPath";
+      reditectionPath = this.configData?.redirectRouteOnLoginSuccess;
+    } else if (this.regFormData.fromPage === "reset") {
+      selectedApiPath = action === 'generate' ? "otpGenerationApiPathForResetPassword" : "resetPasswordApiPath";
+      delete payload.name;
+      reditectionPath = action === 'generate' ? undefined : "/login";
+    } else {
+      selectedApiPath = "";
+    }
+  
+    this.baseApiService
+      .post(
+        this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
+      .subscribe((res: any) => {
+        alert(res?.message);
+        if (action === 'verify' && reditectionPath) {
+          this.router.navigateByUrl(reditectionPath);
+        } else if (action === 'generate') {
+          this.otpInput = true;
+          this.startTimer();
+        }
+      },
+        (err: any) => {
+          alert(err?.error?.message);
+        }
+      );
+  }
+  
+  
 
   startTimer() {
     this.timeLeft = 60;

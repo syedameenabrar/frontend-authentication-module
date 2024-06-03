@@ -11,17 +11,19 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: any, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     
-    const isAuthenticated = localStorage.getItem('name');
+    const isAuthenticated = !!localStorage.getItem('name');
+    const publicRoutes = ['/login', '/signup', '/landing', '/otp', '/reset-password'];
+
     if (isAuthenticated) {
-      if (state?.url === '/login' || state?.url === '/signup' || state?.url === '/landing' || state?.url === '/otp' || state?.url === '/reset-password') {
+      if (publicRoutes.includes(state.url)) {
         return this.router.parseUrl('/home');
       }
       return true;
-    } else{
-      if (state?.url !== '/login' && state?.url !== '/signup' && state?.url !== '/landing' && state?.url !== '/otp' && state?.url !== '/reset-password') {
-        return this.router.navigateByUrl('/landing');
+    } else {
+      if (!publicRoutes.includes(state.url)) {
+        return this.router.parseUrl('/landing');
       }
-      return true
+      return true;
     }
   }
 }

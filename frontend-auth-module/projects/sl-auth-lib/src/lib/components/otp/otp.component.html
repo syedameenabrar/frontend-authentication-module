@@ -9,7 +9,7 @@
   <div class="d-flex bottom-margin">
     <hr>
   </div>
-  <button type="button" (click)="generateOTP()" class="signUpButton" *ngIf="!otpInput; else otpScreen">Generate OTP</button>
+  <button type="button" (click)="processOTP('generate')" class="signUpButton" *ngIf="!otpInput; else otpScreen">Generate OTP</button>
   <ng-template #otpScreen>
     <div class="ngx-otp-input-wrapper">
       <ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)"></ngx-otp-input>
@@ -21,11 +21,11 @@
         target="_blank">Privacy Policy</a> & <a [href]="configData?.termOfUseUrl" target="_blank">Terms of
         Service</a></h6>
     </div>
-    <button type="button" [disabled]="!otp || !checkbox" [ngClass]="{'btn-disabled': !otp || !checkbox}" (click)="verifyOTP()" class="">Verify and login</button>
+    <button type="button" [disabled]="!otp || !checkbox" [ngClass]="{'btn-disabled': !otp || !checkbox}" (click)="processOTP('verify')" class="">Verify and login</button>
     <p *ngIf="timeLeft > 0">Try again after {{ timeLeft }} seconds.
     </p>
     <p [ngClass]="{'resetBtn-disabled': timeLeft > 0}" class="loginRoute">
-      <a (click)=" timeLeft <= 0 ? generateOTP():false"  >Resend OTP</a>
+      <a (click)=" timeLeft <= 0 ? processOTP('generate'):false"  >Resend OTP</a>
     </p>
   </ng-template>
 </div>

@@ -76,33 +76,27 @@ export class LoginComponent {
     }
   }
   
-
   submitData() {
     this.baseApiService
       .post(
         this.configData?.baseUrl,this.configData?.loginApiPath,this.formLib?.myForm.value)
       .subscribe((res: any) => {
         if (res?.result) {
-          localStorage.setItem('accToken',res?.result?.access_token);
-          localStorage.setItem('refToken',res?.result?.refresh_token);
-          localStorage.setItem('email',res?.result?.user?.email);
-          localStorage.setItem('name',res?.result?.user?.name);
-          localStorage.setItem('created_at',res?.result?.user?.created_at);
-          localStorage.setItem('about',res?.result?.user?.about);
-          localStorage.setItem('gender',res?.result?.user?.gender);
-          localStorage.setItem('id',res?.result?.user?.id);
-          localStorage.setItem('image',res?.result?.user?.image);
-          localStorage.setItem('languages',res?.result?.user?.languages);
-          localStorage.setItem('location',res?.result?.user?.location);
-          localStorage.setItem('organization',res?.result?.user?.organization);
-          localStorage.setItem('organization_id',res?.result?.user?.organization_id);
-          localStorage.setItem('preferred_language',res?.result?.user?.preferred_language);
-          localStorage.setItem('roles',res?.result?.user?.roles);
-          localStorage.setItem('share_link',res?.result?.user?.share_link);
-          localStorage.setItem('status',res?.result?.user?.status);
-          localStorage.setItem('user_roles',res?.result?.user?.user_roles);
-          localStorage.setItem('deleted_at',res?.result?.user?.deleted_at);
-          localStorage.setItem('created_at',res?.result?.user?.created_at);
+
+          const tokens = {
+            accToken: res?.result?.access_token,
+            refToken: res?.result?.refresh_token,
+          };
+
+        Object.entries(tokens).forEach(([key, value]) => {
+          localStorage.setItem(key, String(value));
+        });
+
+        const userInfo = res?.result?.user;
+        Object.entries(userInfo).forEach(([key, value]) => {
+          localStorage.setItem(key, String(value));
+        });
+
           this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
         } else {
           alert(res?.message);
