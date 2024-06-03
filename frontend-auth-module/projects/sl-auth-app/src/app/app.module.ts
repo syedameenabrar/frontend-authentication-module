@@ -5,18 +5,12 @@ import { AppComponent } from './app.component';
 import { SlAuthLibModule } from "../../../sl-auth-lib/src/lib/sl-auth-lib.module";
 import { LIBRARY_CONFIG, LibraryConfig } from 'projects/sl-auth-lib/src/lib/config/LibraryConfig';
 import { HomeComponent } from './components/home/home.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { SolutionComponent } from './components/solution/solution.component';
-import { ObservationComponent } from './components/observation/observation.component';
 import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
-        ContactComponent,
-        SolutionComponent,
-        ObservationComponent
+        HomeComponent
     ],
     providers: [
         {
