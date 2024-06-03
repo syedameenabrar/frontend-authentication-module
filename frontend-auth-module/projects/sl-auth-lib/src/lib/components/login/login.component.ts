@@ -83,7 +83,6 @@ export class LoginComponent {
         this.configData?.baseUrl,this.configData?.loginApiPath,this.formLib?.myForm.value)
       .subscribe((res: any) => {
         if (res?.message == "User logged in successfully.") {
-          // alert(res?.message);
           localStorage.setItem('accToken',res?.result?.access_token);
           localStorage.setItem('refToken',res?.result?.refresh_token);
           localStorage.setItem('email',res?.result?.user?.email);

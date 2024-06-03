@@ -16,7 +16,7 @@ export class OtpComponent {
   configData: any;
   endPointService: EndpointService;
   location: Location;
-  otpInput: boolean = true;
+  otpInput: boolean = false;
   regFormData: any;
   otp!: any;
   checkbox:boolean = false;
@@ -54,15 +54,15 @@ export class OtpComponent {
   otpInputConfig: NgxOtpInputConfig = {
     otpLength: 6,
     autofocus: true,
-    // classList: {
-    //   inputBox: "my-super-box-class",
-    //   input: "my-super-class",
-    //   inputFilled: "my-super-filled-class",
-    //   inputDisabled: "my-super-disable-class",
-    //   inputSuccess: "my-super-success-class",
-    //   inputError: "my-super-error-class"
-    // }
   };
+
+
+  handeOtpChange(value: string[]): void {
+    const otp = value.join('');
+    if (otp.length !== 6) {
+      this.otp = "";
+    }
+  }
 
   handleFillEvent(value: string): void {
     this.otp = value;

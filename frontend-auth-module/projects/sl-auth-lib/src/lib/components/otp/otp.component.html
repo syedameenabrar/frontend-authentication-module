@@ -12,7 +12,7 @@
   <button type="button" (click)="generateOTP()" class="signUpButton" *ngIf="!otpInput; else otpScreen">Generate OTP</button>
   <ng-template #otpScreen>
     <div class="ngx-otp-input-wrapper">
-      <ngx-otp-input [config]="otpInputConfig" (fill)="handleFillEvent($event)"></ngx-otp-input>
+      <ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)"></ngx-otp-input>
     </div>
     <p>You will receive an OTP on your registered email address.</p>
     <div class="terms">

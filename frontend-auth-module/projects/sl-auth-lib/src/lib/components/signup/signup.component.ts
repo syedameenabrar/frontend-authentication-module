@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
 import { StateService } from '../../services/state/state.service';
-import { PasswordMatchValidator } from '../password-match.validator';
 @Component({
   selector: 'lib-signup',
   templateUrl: './signup.component.html',
