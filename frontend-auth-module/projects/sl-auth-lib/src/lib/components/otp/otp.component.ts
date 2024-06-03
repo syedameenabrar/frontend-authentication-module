@@ -75,19 +75,21 @@ export class OtpComponent {
       otp: action === 'verify' ? this.otp : undefined
     };
   
-    let selectedApiPath: string;
-    let reditectionPath: string | undefined;
-  
-    if (this.regFormData.fromPage === "signup") {
-      selectedApiPath = action === 'generate' ? "otpGenerationApiPathForRegistration" : "signUpApiPath";
-      reditectionPath = this.configData?.redirectRouteOnLoginSuccess;
-    } else if (this.regFormData.fromPage === "reset") {
-      selectedApiPath = action === 'generate' ? "otpGenerationApiPathForResetPassword" : "resetPasswordApiPath";
-      delete payload.name;
-      reditectionPath = action === 'generate' ? undefined : "/login";
-    } else {
-      selectedApiPath = "";
-    }
+    let selectedApiPath: string = this.regFormData.fromPage === "signup" 
+    ? action === 'generate' ? "otpGenerationApiPathForRegistration" : "signUpApiPath" 
+    : this.regFormData.fromPage === "reset" 
+        ? action === 'generate' ? "otpGenerationApiPathForResetPassword" : "resetPasswordApiPath" 
+        : "";
+
+        let reditectionPath: string = this.regFormData.fromPage === "signup" 
+    ? this.configData?.redirectRouteOnLoginSuccess 
+    : this.regFormData.fromPage === "reset" 
+        ? action === 'generate' ? undefined : "/login" 
+        : undefined;
+
+if (this.regFormData.fromPage === "reset" && action === 'generate') {
+    delete payload.name;
+}
   
     this.baseApiService
       .post(
