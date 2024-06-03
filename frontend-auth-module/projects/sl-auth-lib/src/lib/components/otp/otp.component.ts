@@ -67,81 +67,6 @@ export class OtpComponent {
     this.location.back();
   }
 
-  generateOTP() {
-    let payload = {
-      email: this.regFormData?.email,
-      password: this.regFormData?.password,
-      name: this.regFormData?.name,
-    }
-
-    // let selectedApiPath: string;
-    // if (this.regFormData.fromPage === "signup") {
-    //   selectedApiPath = "otpGenerationApiPathForRegistration"
-    // } else if (this.regFormData.fromPage === "reset") {
-    //   selectedApiPath = "otpGenerationApiPathForResetPassword"
-    //   delete payload.name;
-    // }
-    // else {
-    //   selectedApiPath = "";
-    // }
-
-
-    let selectedApiPath: string = this.regFormData.fromPage === "signup"
-      ? "otpGenerationApiPathForRegistration"
-      : this.regFormData.fromPage === "reset"
-        ? (delete payload.name, "otpGenerationApiPathForResetPassword")
-        : "";
-
-    this.baseApiService
-      .post(
-        this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
-      .subscribe((res: any) => {
-        this.otpInput = true;
-        alert(res?.message);
-        this.startTimer();
-      },
-        (err: any) => {
-          alert(err?.error?.message);
-        }
-      );
-  }
-
-
-  verifyOTP() {
-    let payload = {
-      email: this.regFormData?.email,
-      password: this.regFormData?.password,
-      name: this.regFormData?.name,
-      otp: this.otp
-    }
-    let selectedApiPath: string;
-    let reditectionPath: string;
-
-    if (this.regFormData.fromPage === "signup") {
-      selectedApiPath = "signUpApiPath";
-      reditectionPath = this.configData?.redirectRouteOnLoginSuccess
-    } else if (this.regFormData.fromPage === "reset") {
-      selectedApiPath = "resetPasswordApiPath";
-      delete payload.name;
-      reditectionPath = "/login"
-    }
-    else {
-      selectedApiPath = "";
-    }
-
-    this.baseApiService
-      .post(
-        this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
-      .subscribe((res: any) => {
-        alert(res?.message);
-        this.router.navigateByUrl(reditectionPath);
-      },
-        (err: any) => {
-          alert(err?.error?.message);
-        }
-      );
-  }
-
   processOTP(action: 'generate' | 'verify') {
     let payload = {
       email: this.regFormData?.email,
@@ -182,16 +107,12 @@ export class OtpComponent {
       );
   }
   
-  
-
   startTimer() {
     this.timeLeft = 60;
     interval(1000).subscribe(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
-      } else {
-        // this.intervalSubscription.unsubscribe();
-      }
+      } 
     });
   }
 }
