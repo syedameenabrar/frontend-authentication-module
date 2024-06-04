@@ -1,0 +1,18 @@
+<div class="header">
+    <a (click)="navigateBack()" class="back-arrow">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+</div>
+<div class="login-container">
+    <h1>{{ mode === 'signup' ? 'Signup to' +' '+ configData?.projectName : 'Reset password' }}</h1>
+    <div class="hrTag">
+    </div>
+    <form>
+        <dynamic-form [formJson]="formJson.controls" #formLib></dynamic-form>
+        <button type="button" [disabled]="formLib?.myForm?.invalid"
+            [ngClass]="{'btn-disabled': formLib?.myForm?.invalid}" (click)="navigateToGenerateOtpPage()">
+            {{ mode === 'signup' ? 'Sign Up' : 'Reset Password' }}
+        </button>
+    </form>
+    <p *ngIf="mode === 'signup'" class="loginRoute">Have an account already? <br> <a routerLink="/login">Login</a></p>
+</div>

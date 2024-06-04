@@ -1,23 +1,23 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild, inject, Input, Renderer2 } from '@angular/core';
 import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
 import { StateService } from '../../services/state/state.service';
 @Component({
-  selector: 'lib-signup',
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  selector: 'lib-singup-reset-pass',
+  templateUrl: './singup-reset-pass.component.html',
+  styleUrl: './singup-reset-pass.component.css'
 })
-export class SignupComponent {
+export class SingupResetPassComponent {
   @ViewChild('formLib') formLib: MainFormComponent | undefined;
+  mode: 'signup' | 'reset' = 'signup'; // Default mode is signup
   baseApiService: ApiBaseService;
   endPointService: EndpointService;
   router: Router;
   configData: any;
-  location:Location;
-
+  location: Location;
   formJson: any = {
     controls: [
       {
@@ -60,7 +60,7 @@ export class SignupComponent {
         errorMessage: {
           required: "Enter password",
           minlength: "Password should contain minimum of 10 characters",
-          pattern:"Password must have at least one uppercase letter, one number, one special character, and be at least 10 characters long"
+          pattern: "Password must have at least one uppercase letter, one number, one special character, and be at least 10 characters long"
         },
         validators: {
           required: true,
@@ -87,15 +87,22 @@ export class SignupComponent {
     ],
   };
 
-
-  constructor(private stateService: StateService) {
+  constructor(private stateService: StateService, private route: ActivatedRoute
+    ,private renderer: Renderer2
+  ) {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
-    this.location= inject(Location);
+    this.location = inject(Location);
   }
 
   ngOnInit() {
+    this.mode = this.route.snapshot.data['mode'];
+    if (this.mode === 'reset') {
+      this.formJson.controls = this.formJson.controls.filter((control: any) => control.name !== 'name');
+      // const formContainer = document.querySelector('.login-container') as HTMLElement;
+      // this.renderer.setStyle(formContainer, 'top', '40%');
+    }
     this.fetchConfigData();
   }
 
@@ -107,22 +114,21 @@ export class SignupComponent {
     }
   }
 
-
   navigateToGenerateOtpPage() {
     const formData = this.formLib?.myForm.value
     const passwordsMatch = formData.password === formData.confirm_password;
     if (passwordsMatch) {
-      formData.fromPage = 'signup';
+      formData.fromPage = this.mode;
       this.stateService.setData(formData);
       this.router.navigate(['/otp']);
     } else {
-      alert("Please enter same password");
-      console.error('Please enter same password');
+      alert("Please enter the same password");
+      console.error('Please enter the same password');
     }
- }
+  }
 
   navigateBack() {
     this.location.back();
   }
-  
+
 }

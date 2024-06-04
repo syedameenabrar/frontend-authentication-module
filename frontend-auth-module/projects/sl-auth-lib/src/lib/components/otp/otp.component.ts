@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Renderer2, inject } from '@angular/core';
 import { NgxOtpInputConfig } from "ngx-otp-input";
 import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { ApiBaseService } from '../../services/base-api/api-base.service';
@@ -25,7 +25,7 @@ export class OtpComponent {
   router: Router;
   timeLeft: number = 60;
 
-  constructor(private stateService: StateService) {
+  constructor(private stateService: StateService, private renderer:Renderer2) {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
@@ -102,6 +102,9 @@ if (this.regFormData.fromPage === "reset" && action === 'generate') {
           this.otpInput = true;
           this.startTimer();
         }
+
+        const formContainer = document.querySelector('.login-container') as HTMLElement;
+        this.renderer.setStyle(formContainer, 'top', '45%');
       },
         (err: any) => {
           alert(err?.error?.message);
