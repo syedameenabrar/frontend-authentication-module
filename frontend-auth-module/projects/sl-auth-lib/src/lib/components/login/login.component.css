@@ -34,7 +34,7 @@
 
 .login-container {
   width: 80%;
-  max-width: 25rem;
+  max-width: 40rem;
   padding: 1.25rem;
   background-color: var(--color-light);
   text-align: center;
@@ -45,8 +45,8 @@
 }
 
 .login-container h1 {
-  font-family: NotoSans-Regular;
-  font-size: 1.875rem;
+  font-family: var(--ion-default-font);
+  font-size: 1.575rem;
   font-style: normal;
   font-weight: 700;
   line-height: 2.25rem;
@@ -74,6 +74,7 @@
   font-size: 1rem;
   font-weight: 700;
   text-transform: none;
+  width: 80%;
 }
 
 .login-container button:hover {
@@ -96,7 +97,7 @@ hr {
 
 .forgotPass{
   color: var(--color-secondary);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1rem;
   margin-bottom: 10%;
   cursor: pointer;
@@ -117,5 +118,12 @@ hr {
   .login-container {
     width: 90%;
     max-width: none;
+  }
+}
+
+
+@media (min-width: 768px) {
+  hr {
+    width: 25%;
   }
 }

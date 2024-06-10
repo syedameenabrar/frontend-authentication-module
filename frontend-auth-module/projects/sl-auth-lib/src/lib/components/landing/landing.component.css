@@ -1,6 +1,6 @@
 .login-container {
   width: 80%; 
-  max-width: 31.25rem; 
+  max-width: 36.25rem; 
   padding: 1.25rem;
   background-color: var(--color-light);
   text-align: center;
@@ -11,7 +11,7 @@
 }
 
 .login-container h1 {
-  font-family: NotoSans-Regular;
+  font-family: var(--ion-default-font);
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 700;

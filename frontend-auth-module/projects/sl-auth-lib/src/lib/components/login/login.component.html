@@ -16,7 +16,7 @@
     <button type="button" [disabled]="formLib?.myForm?.invalid" [ngClass]="{'btn-disabled': formLib?.myForm?.invalid}"
       (click)="submitData()">Login</button>
   </form>
-  <h5 class="forgotPass" routerLink="/reset-password">Forgot password?</h5>
+  <p class="forgotPass" routerLink="/reset-password">Forgot password?</p>
   <p class="troubleInSingup">Having trouble in logging in/signing up? Write to us at {{configData?.supportEmail}}
   </p>
   <p class="t-and-c">By continuing, you agree to accept our <a [href]="configData?.privacyPolicyUrl"

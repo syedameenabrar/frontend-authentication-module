@@ -33,8 +33,8 @@
 }
 
 .login-container h1 {
-  font-family: NotoSans-Regular;
-  font-size: 1.875rem;
+  font-family: var(--ion-default-font);
+  font-size: 1.575rem;
   font-style: normal;
   font-weight: 700;
   line-height: 2.25rem;
@@ -84,7 +84,7 @@ form {
   height: 0.35rem;
   /* margin: 0.4rem 24.7rem 0.625rem; */
   margin-bottom: 5rem;
-  width: 15%;
+  width: 14%;
   text-align: left;
   align-self: flex-start;
   margin-left: 27%;
@@ -92,7 +92,7 @@ form {
 
 .loginRoute {
   color: var(--color-dark);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1rem;
   margin-bottom: 10%;
   cursor: pointer;

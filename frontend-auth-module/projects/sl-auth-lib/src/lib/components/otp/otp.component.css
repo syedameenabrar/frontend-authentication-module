@@ -32,7 +32,7 @@
 }
 
 .login-container h1 {
-  font-family: NotoSans-Regular;
+  font-family: var(--ion-default-font);
   font-size: 1.875rem;
   font-style: normal;
   font-weight: 700;
