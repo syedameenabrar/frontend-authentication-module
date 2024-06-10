@@ -79,34 +79,34 @@ export class LoginComponent {
   submitData() {
     this.baseApiService
       .post(
-        this.configData?.baseUrl,this.configData?.loginApiPath,this.formLib?.myForm.value)
-      .subscribe((res: any) => {
-        if (res?.result) {
-
-          const tokens = {
-            accToken: res?.result?.access_token,
-            refToken: res?.result?.refresh_token,
-          };
-
-        Object.entries(tokens).forEach(([key, value]) => {
-          localStorage.setItem(key, String(value));
-        });
-
-        const userInfo = res?.result?.user;
-        Object.entries(userInfo).forEach(([key, value]) => {
-          localStorage.setItem(key, String(value));
-        });
-
-          this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
-        } else {
-          alert(res?.message);
+        this.configData?.baseUrl,
+        this.configData?.loginApiPath,
+        this.formLib?.myForm.value
+      )
+      .subscribe(
+        (res: any) => {
+          if (res?.result) {
+            const dataToStore = {
+              accToken: res?.result?.access_token,
+              refToken: res?.result?.refresh_token,
+              ...res?.result?.user
+            };
+  
+            Object.entries(dataToStore).forEach(([key, value]) => {
+              localStorage.setItem(key, String(value));
+            });
+  
+            this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
+          } else {
+            alert(res?.message);
+          }
+        },
+        (err: any) => {
+          alert(err?.error?.message);
         }
-      },
-    (err:any) => {
-      alert(err?.error?.message);
-    }
-    );
+      );
   }
+  
 
   navigateBack() {
     this.location.back();

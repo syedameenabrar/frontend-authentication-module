@@ -68,49 +68,53 @@ export class OtpComponent {
   }
 
   processOTP(action: 'generate' | 'verify') {
+    const isSignup = this.regFormData.fromPage === "signup";
+    const isReset = this.regFormData.fromPage === "reset";
+  
     let payload = {
       email: this.regFormData?.email,
       password: this.regFormData?.password,
-      name: this.regFormData?.name,
+      name: isSignup ? this.regFormData?.name : undefined,
       otp: action === 'verify' ? this.otp : undefined
     };
   
-    let selectedApiPath: string = this.regFormData.fromPage === "signup" 
-    ? action === 'generate' ? "otpGenerationApiPathForRegistration" : "signUpApiPath" 
-    : this.regFormData.fromPage === "reset" 
-        ? action === 'generate' ? "otpGenerationApiPathForResetPassword" : "resetPasswordApiPath" 
+    if (isReset && action === 'generate') {
+      delete payload.name;
+    }
+  
+    const selectedApiPath = isSignup
+      ? action === 'generate' ? "otpGenerationApiPathForRegistration" : "signUpApiPath"
+      : isReset
+        ? action === 'generate' ? "otpGenerationApiPathForResetPassword" : "resetPasswordApiPath"
         : "";
-
-        let reditectionPath: string = this.regFormData.fromPage === "signup" 
-    ? this.configData?.redirectRouteOnLoginSuccess 
-    : this.regFormData.fromPage === "reset" 
-        ? action === 'generate' ? undefined : "/login" 
+  
+    const redirectionPath = isSignup
+      ? this.configData?.redirectRouteOnLoginSuccess
+      : isReset
+        ? action === 'generate' ? undefined : "/login"
         : undefined;
-
-if (this.regFormData.fromPage === "reset" && action === 'generate') {
-    delete payload.name;
-}
   
     this.baseApiService
-      .post(
-        this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
-      .subscribe((res: any) => {
-        alert(res?.message);
-        if (action === 'verify' && reditectionPath) {
-          this.router.navigateByUrl(reditectionPath);
-        } else if (action === 'generate') {
-          this.otpInput = true;
-          this.startTimer();
-        }
-
-        const formContainer = document.querySelector('.login-container') as HTMLElement;
-        this.renderer.setStyle(formContainer, 'top', '45%');
-      },
+      .post(this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
+      .subscribe(
+        (res: any) => {
+          alert(res?.message);
+          if (action === 'verify' && redirectionPath) {
+            this.router.navigateByUrl(redirectionPath);
+          } else if (action === 'generate') {
+            this.otpInput = true;
+            this.startTimer();
+          }
+  
+          const formContainer = document.querySelector('.login-container') as HTMLElement;
+          this.renderer.setStyle(formContainer, 'top', '45%');
+        },
         (err: any) => {
           alert(err?.error?.message);
         }
       );
   }
+  
   
   startTimer() {
     this.timeLeft = 60;

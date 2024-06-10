@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, Router, RouterStateSnapshot, UrlTree, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,18 +9,25 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router) {}
 
-  canActivate(route: any, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    
-    const isAuthenticated = !!localStorage.getItem('name');
+  private isPublicRoute(url: string): boolean {
     const publicRoutes = ['/login', '/signup', '/landing', '/otp', '/reset-password'];
+    return publicRoutes.includes(url);
+  }
+
+  canActivate(
+    route: ActivatedRouteSnapshot, 
+    state: RouterStateSnapshot
+  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+
+    const isAuthenticated = !!localStorage.getItem('name');
 
     if (isAuthenticated) {
-      if (publicRoutes.includes(state.url)) {
+      if (this.isPublicRoute(state.url)) {
         return this.router.parseUrl('/home');
       }
       return true;
     } else {
-      if (!publicRoutes.includes(state.url)) {
+      if (!this.isPublicRoute(state.url)) {
         return this.router.parseUrl('/landing');
       }
       return true;
