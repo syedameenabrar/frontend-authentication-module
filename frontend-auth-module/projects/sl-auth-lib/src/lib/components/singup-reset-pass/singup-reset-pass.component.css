@@ -40,7 +40,7 @@
   line-height: 2.25rem;
   letter-spacing: 0em;
   text-align: left;
-  width: 46%;
+  width: 51%;
   margin: 0rem;
 }
 
@@ -75,19 +75,18 @@
 }
 
 form {
-  width: 45%;
+  width: 50%;
 }
 
 .login-container .hrTag {
   background: var(--color-primary);
   border: none;
   height: 0.35rem;
-  /* margin: 0.4rem 24.7rem 0.625rem; */
   margin-bottom: 5rem;
   width: 14%;
   text-align: left;
   align-self: flex-start;
-  margin-left: 27%;
+  margin-left: 24.5%;
 }
 
 .loginRoute {
@@ -118,53 +117,16 @@ form {
 
 @media screen and (max-width: 768px) {
   .login-container h1 {
-      width: 82%;
+      width: 90%;
   }
   form {
-      width: 80%;
+      width: 88%;
   }
   .login-container .hrTag {
-      /* margin: 0.4rem 6rem 0.625rem; */
       margin-bottom: 5rem;
       width: 25%;
       text-align: left;
       align-self: flex-start;
-      margin-left: 9%;
+      margin-left: 5.5%;
   }
 }
-
-/* @media screen and (min-width: 2560px) {
-  .login-container .hrTag {
-      margin: 0.4rem 44rem 0.625rem;
-      width: 8%;
-  }
-}
-
-@media screen and (min-width: 1140px) {
-  .login-container .hrTag {
-      margin: 0.4rem 0 4rem 0;
-      width: 8%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .login-container .hrTag {
-      margin: 0.4rem 0 3rem 22rem;
-      width: 17%;
-  }
-}
-
-
-@media screen and (max-width: 425px) {
-  .login-container .hrTag {
-      margin: 0.4rem 0 3rem 3.4rem;
-      width: 50%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .login-container .hrTag {
-      margin: 0.4rem 0 3rem 2.6rem;
-      width: 65%;
-  }
-} */

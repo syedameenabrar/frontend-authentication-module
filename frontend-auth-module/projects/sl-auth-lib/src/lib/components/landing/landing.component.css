@@ -1,5 +1,5 @@
 .login-container {
-  width: 80%; 
+  width: 60%; 
   max-width: 36.25rem; 
   padding: 1.25rem;
   background-color: var(--color-light);
@@ -12,7 +12,7 @@
 
 .login-container h1 {
   font-family: var(--ion-default-font);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: 2.25rem;
@@ -42,6 +42,9 @@
   font-size: 1rem;
   font-weight: 700;
   text-transform: none;
+  width: 80%;
+    margin: 0 auto;
+    padding: 12px;
 }
 
 .login-container button span {
@@ -68,7 +71,7 @@ hr {
 
 .haveAccountAlready {
   color: var(--dark-color);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -98,16 +101,25 @@ hr {
 .or-section p span {
   background: var(--color-light);
   padding: 0 0.625rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .signUpButton {
   margin-top: 2.5rem;
 }
 
+.bottom-margin{
+  margin-bottom: 150px;
+}
+
+
 @media screen and (max-width: 768px) {
   .login-container {
     width: 90%;
     max-width: none;
+    top: 40%;
+  }
+  .bottom-margin{
+    margin-bottom: 90px;
   }
 }

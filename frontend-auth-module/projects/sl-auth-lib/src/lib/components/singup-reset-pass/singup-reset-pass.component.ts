@@ -12,7 +12,7 @@ import { StateService } from '../../services/state/state.service';
 })
 export class SingupResetPassComponent {
   @ViewChild('formLib') formLib: MainFormComponent | undefined;
-  mode: 'signup' | 'reset' = 'signup'; // Default mode is signup
+  mode: 'signup' | 'reset' = 'signup';
   baseApiService: ApiBaseService;
   endPointService: EndpointService;
   router: Router;
@@ -100,8 +100,6 @@ export class SingupResetPassComponent {
     this.mode = this.route.snapshot.data['mode'];
     if (this.mode === 'reset') {
       this.formJson.controls = this.formJson.controls.filter((control: any) => control.name !== 'name');
-      // const formContainer = document.querySelector('.login-container') as HTMLElement;
-      // this.renderer.setStyle(formContainer, 'top', '40%');
     }
     this.fetchConfigData();
   }
