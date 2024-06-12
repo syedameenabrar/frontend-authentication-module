@@ -52,7 +52,7 @@
   line-height: 2.25rem;
   letter-spacing: 0em;
   text-align: left;
-  margin: 0rem;
+  margin-bottom: 0.3rem;
 }
 
 .login-container input[type="text"],
@@ -92,19 +92,20 @@ hr {
   height: 0.35rem;
   width: 40%;
   margin: 0 0 0.625rem;
-  margin-bottom: 2.5rem
 }
 
 .forgotPass{
   color: var(--color-secondary);
   font-weight: 500;
   font-size: 1rem;
-  margin-bottom: 10%;
+  margin-bottom: 7%;
   cursor: pointer;
 }
 
 .troubleInSingup{
   color: var(--color-disable-text);
+  font-size: 15px;
+  margin-bottom: 40px;
 }
 
 .t-and-c{
@@ -112,6 +113,14 @@ hr {
   text-align: left;
   font-size: 0.813rem;
   text-align: center;
+}
+
+.t-and-c a{
+  text-decoration: none;
+}
+
+form{
+  margin-top: 70px;
 }
 
 @media screen and (max-width: 768px) {
