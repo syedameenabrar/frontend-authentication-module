@@ -17,11 +17,10 @@ export class AuthService {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
+    this.fetchConfigData();
+
   }
 
-  ngOnInit() {
-    this.fetchConfigData();
-  }
 
   async fetchConfigData() {
     try {
@@ -39,7 +38,7 @@ export class AuthService {
     return false;
   }
 
-  logout(): void {
+  logout() {
     this.loggedIn = false;
     const payload = {
       refresh_token: localStorage?.getItem('refToken')
