@@ -1,12 +1,35 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
+import { ApiBaseService } from './base-api/api-base.service';
+import { EndpointService } from './endpoint/endpoint.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private loggedIn = false;
+  baseApiService: ApiBaseService;
+  endPointService: EndpointService;
+  router: Router;
+  configData: any;
 
-  constructor() { }
+  constructor() {
+    this.baseApiService = inject(ApiBaseService);
+    this.endPointService = inject(EndpointService);
+    this.router = inject(Router);
+  }
+
+  ngOnInit() {
+    this.fetchConfigData();
+  }
+
+  async fetchConfigData() {
+    try {
+      this.configData = await this.endPointService.getEndpoint();
+    } catch (error) {
+      console.error("An error occurred while fetching configData:", error);
+    }
+  }
 
   login(): boolean {
     if (localStorage.getItem('name')) {
@@ -18,6 +41,31 @@ export class AuthService {
 
   logout(): void {
     this.loggedIn = false;
+    const payload = {
+      refresh_token: localStorage?.getItem('refToken')
+    }
+
+    this.baseApiService
+      .post(
+        this.configData?.baseUrl,
+        this.configData?.logoutApiPath,
+        payload
+      ).pipe(
+        catchError((error) => {
+          alert(error?.error?.message);
+          throw error
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          if (res?.responseCode == "OK") {
+            localStorage.clear();
+            this.router.navigate(['/landing']);
+          } else {
+            alert(res?.message);
+          }
+        }
+      );
   }
 
   isLoggedIn(): boolean {

@@ -8,6 +8,8 @@ export * from './lib/sl-auth-lib.module';
 export * from './lib/services/guard/auth.guard';
 export * from './lib/sl-routing-routing.module';
 export * from './lib/config/LibraryConfig';
+export * from './lib/services/auth.service';
+
 
 
 
