@@ -44,7 +44,7 @@
   text-transform: none;
   width: 80%;
     margin: 0 auto;
-    padding: 12px;
+    padding: 0.75rem;
 }
 
 .login-container button span {
@@ -91,7 +91,7 @@ hr {
 }
 
 .or-section p {
-  width: 100%;
+  width: 80%;
   text-align: center;
   border-bottom: 0.125rem solid var(--color-grey);
   line-height: .1em;
@@ -109,7 +109,7 @@ hr {
 }
 
 .bottom-margin{
-  margin-bottom: 150px;
+  margin-bottom: 9.375rem;
 }
 
 
@@ -120,6 +120,6 @@ hr {
     top: 40%;
   }
   .bottom-margin{
-    margin-bottom: 90px;
+    margin-bottom: 5.625rem;
   }
 }

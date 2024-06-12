@@ -104,8 +104,8 @@ hr {
 
 .troubleInSingup{
   color: var(--color-disable-text);
-  font-size: 15px;
-  margin-bottom: 40px;
+  font-size: 0.938rem;
+  margin-bottom: 2.5rem;
 }
 
 .t-and-c{
@@ -120,14 +120,14 @@ hr {
 }
 
 form{
-  margin-top: 70px;
+  margin-top: 4.375rem;
 }
 
 @media screen and (max-width: 768px) {
   .login-container {
     width: 88%;
     max-width: none;
-    top: 46%;
+    top: 38%;
   z-index: -1;
 
   }
