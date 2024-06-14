@@ -109,6 +109,10 @@ export class LoginComponent {
   
 
   navigateBack() {
-    this.location.back();
+    if (window.history.length < 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/landing']);
+    }
   }
 }

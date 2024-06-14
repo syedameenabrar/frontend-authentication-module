@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { ApiBaseService } from './base-api/api-base.service';
 import { EndpointService } from './endpoint/endpoint.service';
 @Injectable({
@@ -51,17 +51,17 @@ export class AuthService {
         payload
       ).pipe(
         catchError((error) => {
-          alert(error?.error?.message);
+          alert(error?.error?.message || 'An error occurred during logout');
           throw error
         })
       )
       .subscribe(
         (res: any) => {
-          if (res?.responseCode == "OK") {
+          if (res?.responseCode === "OK") {
             localStorage.clear();
             this.router.navigate(['/landing']);
           } else {
-            alert(res?.message);
+            alert(res?.message || 'Logout unsuccessful');
           }
         }
       );
