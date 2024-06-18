@@ -7,30 +7,31 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
+  private readonly publicRoutes = ['/login', '/signup', '/landing', '/otp', '/reset-password'];
+
   constructor(private router: Router) {}
 
   private isPublicRoute(url: string): boolean {
-    const publicRoutes = ['/login', '/signup', '/landing', '/otp', '/reset-password'];
-    return publicRoutes.includes(url);
+    return this.publicRoutes.includes(url);
+  }
+
+  private isAuthenticated(): boolean {
+    return !!localStorage.getItem('name');
   }
 
   canActivate(
     route: ActivatedRouteSnapshot, 
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    
+    const url = state.url;
+    const authenticated = this.isAuthenticated();
+    const publicRoute = this.isPublicRoute(url);
 
-    const isAuthenticated = !!localStorage.getItem('name');
-
-    if (isAuthenticated) {
-      if (this.isPublicRoute(state.url)) {
-        return this.router.parseUrl('/home');
-      }
-      return true;
+    if (authenticated) {
+      return publicRoute ? this.router.parseUrl('/home') : true;
     } else {
-      if (!this.isPublicRoute(state.url)) {
-        return this.router.parseUrl('/landing');
-      }
-      return true;
+      return publicRoute ? true : this.router.parseUrl('/landing');
     }
   }
 }

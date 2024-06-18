@@ -21,12 +21,6 @@ mat-label {
 }
 
 
-
-
-
-
-
-
 :root {
   --ion-default-font: "NotoSans-Regular";
   --ion-font-family: "NotoSans-Regular";
@@ -49,9 +43,7 @@ mat-label {
 }
 
 
-
-
-// Mentoring app fonts
+// App fonts
 @font-face {
   font-family: 'NotoSans-Bold';
   font-style: normal;
@@ -80,7 +72,6 @@ mat-label {
   src: url('./assets/fonts/noto_Sans/NotoSans-BoldItalic.ttf');
 }
 
-// html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;

@@ -133,4 +133,8 @@ export class SingupResetPassComponent {
     }
   }
 
+  get headerText(): string {
+    return this.mode === 'signup' ? `Signup to ${this.configData?.projectName}` : 'Reset password';
+  }
+
 }
