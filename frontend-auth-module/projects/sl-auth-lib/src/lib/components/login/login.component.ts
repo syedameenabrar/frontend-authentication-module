@@ -4,6 +4,7 @@ import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
+import { catchError } from 'rxjs';
 
 
 @Component({
@@ -69,11 +70,14 @@ export class LoginComponent {
   }
 
   async fetchConfigData() {
-    try {
-      this.configData = await this.endPointService.getEndpoint();
-    } catch (error) {
-      console.error("An error occurred while fetching configData:", error);
-    }
+    this.endPointService.getEndpoint().pipe(
+      catchError((error) => {
+        alert("An error occurred while fetching configData");
+        throw error
+      })
+    ).subscribe(data => {
+      this.configData = data;
+    });
   }
   
   submitData() {

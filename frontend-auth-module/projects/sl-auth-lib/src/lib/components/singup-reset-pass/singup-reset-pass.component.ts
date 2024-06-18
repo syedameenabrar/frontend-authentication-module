@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
 import { StateService } from '../../services/state/state.service';
+import { catchError } from 'rxjs';
 @Component({
   selector: 'lib-singup-reset-pass',
   templateUrl: './singup-reset-pass.component.html',
@@ -105,11 +106,14 @@ export class SingupResetPassComponent {
   }
 
   async fetchConfigData() {
-    try {
-      this.configData = await this.endPointService.getEndpoint();
-    } catch (error) {
-      console.error("An error occurred while fetching configData:", error);
-    }
+    this.endPointService.getEndpoint().pipe(
+      catchError((error) => {
+        alert("An error occurred while fetching configData");
+        throw error
+      })
+    ).subscribe(data => {
+      this.configData = data;
+    });
   }
 
   navigateToGenerateOtpPage() {

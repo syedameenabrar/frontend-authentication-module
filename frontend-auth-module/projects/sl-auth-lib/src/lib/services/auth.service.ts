@@ -23,11 +23,14 @@ export class AuthService {
 
 
   async fetchConfigData() {
-    try {
-      this.configData = await this.endPointService.getEndpoint();
-    } catch (error) {
-      console.error("An error occurred while fetching configData:", error);
-    }
+    this.endPointService.getEndpoint().pipe(
+      catchError((error) => {
+        alert("An error occurred while fetching configData");
+        throw error
+      })
+    ).subscribe(data => {
+      this.configData = data;
+    });
   }
 
   login(): boolean {

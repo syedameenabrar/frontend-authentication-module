@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
+import { catchError } from 'rxjs';
 @Component({
   selector: 'lib-landing',
   templateUrl: './landing.component.html',
@@ -18,11 +19,13 @@ export class LandingComponent {
   }
 
   async fetchConfigData() {
-    try {
-      this.configData = await this.endPointService.getEndpoint();
-    } catch (error) {
-      console.error("An error occurred while fetching configData:", error);
-    }
+    this.endPointService.getEndpoint().pipe(
+      catchError((error) => {
+        alert("An error occurred while fetching configData");
+        throw error
+      })
+    ).subscribe(data => {
+      this.configData = data;
+    });
   }
-
 }
