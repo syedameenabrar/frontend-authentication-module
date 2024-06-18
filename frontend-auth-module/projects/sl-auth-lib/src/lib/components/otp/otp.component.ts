@@ -5,7 +5,7 @@ import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { StateService } from '../../services/state/state.service';
-import { Subscription, interval } from 'rxjs';
+import { Subscription, catchError, interval } from 'rxjs';
 
 @Component({
   selector: 'lib-otp',
@@ -24,8 +24,9 @@ export class OtpComponent {
   baseApiService: ApiBaseService;
   router: Router;
   timeLeft: number = 60;
+  formContainer: HTMLElement | null = null;
 
-  constructor(private stateService: StateService, private renderer:Renderer2) {
+  constructor(private stateService: StateService, private renderer: Renderer2) {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
@@ -36,6 +37,7 @@ export class OtpComponent {
     this.startTimer();
     this.regFormData = this.stateService.getData();
     this.fetchConfigData();
+    this.formContainer = this.renderer.selectRootElement('.login-container', true);
   }
 
   async fetchConfigData() {
@@ -51,8 +53,7 @@ export class OtpComponent {
     autofocus: true
   };
 
-
-  handeOtpChange(value: string[]): void {
+  handleOtpChange(value: string[]): void {
     const otp = value.join('');
     if (otp.length !== 6) {
       this.otp = "";
@@ -74,32 +75,48 @@ export class OtpComponent {
   processOTP(action: 'generate' | 'verify') {
     const isSignup = this.regFormData.fromPage === "signup";
     const isReset = this.regFormData.fromPage === "reset";
-  
+
     let payload = {
       email: this.regFormData?.email,
       password: this.regFormData?.password,
-      name: isSignup ? this.regFormData?.name : undefined,
-      otp: action === 'verify' ? this.otp : undefined
+      name: isSignup ? this.regFormData?.name : null,
+      otp: action === 'verify' ? this.otp : null
     };
-  
+
     if (isReset && action === 'generate') {
       delete payload.name;
     }
-  
-    const selectedApiPath = isSignup
-      ? action === 'generate' ? "otpGenerationApiPathForRegistration" : "signUpApiPath"
-      : isReset
-        ? action === 'generate' ? "otpGenerationApiPathForResetPassword" : "resetPasswordApiPath"
-        : "";
-  
+
+    const apiPaths = {
+      signup: {
+        generate: "otpGenerationApiPathForRegistration",
+        verify: "signUpApiPath"
+      },
+      reset: {
+        generate: "otpGenerationApiPathForResetPassword",
+        verify: "resetPasswordApiPath"
+      }
+    };
+
+    type ActionType = keyof typeof apiPaths;
+    const actionType: ActionType | '' = isSignup ? 'signup' : isReset ? 'reset' : '';
+
+    const selectedApiPath = actionType ? apiPaths[actionType]?.[action] : "";
+
     const redirectionPath = isSignup
       ? this.configData?.redirectRouteOnLoginSuccess
       : isReset
         ? action === 'generate' ? undefined : "/login"
         : undefined;
-  
+
     this.baseApiService
       .post(this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
+      .pipe(
+        catchError((error) => {
+          alert(error?.error?.message || `An error occurred during ${action} OTP`);
+          throw error
+        })
+      )
       .subscribe(
         (res: any) => {
           alert(res?.message);
@@ -108,24 +125,23 @@ export class OtpComponent {
           } else if (action === 'generate') {
             this.otpInput = true;
             this.startTimer();
+          } else {
+            console.error(`An error occurred during ${action} OTP`);
           }
-  
-          const formContainer = document.querySelector('.login-container') as HTMLElement;
-          this.renderer.setStyle(formContainer, 'top', '45%');
-        },
-        (err: any) => {
-          alert(err?.error?.message);
+
+          if (this.formContainer) {
+            this.renderer.setStyle(this.formContainer, 'top', '45%');
+          }
         }
       );
   }
-  
-  
+
   startTimer() {
     this.timeLeft = 60;
     interval(1000).subscribe(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
-      } 
+      }
     });
   }
 }
