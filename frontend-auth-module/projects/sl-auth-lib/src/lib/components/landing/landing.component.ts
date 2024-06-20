@@ -7,10 +7,10 @@ import { catchError } from 'rxjs';
   styleUrl: './landing.component.css'
 })
 export class LandingComponent {
-  configData:any;
-  endPointService:EndpointService;
+  configData: any;
+  endPointService: EndpointService;
 
-  constructor() { 
+  constructor() {
     this.endPointService = inject(EndpointService);
   }
 
@@ -18,7 +18,7 @@ export class LandingComponent {
     this.fetchConfigData();
   }
 
-  async fetchConfigData() {
+  fetchConfigData() {
     this.endPointService.getEndpoint().pipe(
       catchError((error) => {
         alert("An error occurred while fetching configData");

@@ -103,7 +103,7 @@ form {
   margin-left: 24.5%;
 }
 
-.loginRoute {
+.login-route {
   color: var(--color-dark);
   font-weight: 500;
   font-size: 1rem;
@@ -112,7 +112,7 @@ form {
   line-height: 1.563rem;
 }
 
-.loginRoute a {
+.login-route a {
   color: var(--color-secondary);
   cursor: pointer;
 }
@@ -121,20 +121,6 @@ form {
 .error-message {
   color: var(--color-danger);
   margin-top: 0.313rem;
-}
-
-.forgotPass{
-  color: var(--color-secondary);
-  font-weight: 500;
-  font-size: 1rem;
-  margin-bottom: 7%;
-  cursor: pointer;
-}
-
-.troubleInSingup{
-  color: var(--color-disable-text);
-  font-size: 0.938rem;
-  margin-bottom: 2.5rem;
 }
 
 .t-and-c{
@@ -155,7 +141,7 @@ form {
   width: 85%;
 }
 
-.resetBtn-disabled a {
+.reset-btn-disabled a {
   color: #585858 !important;
 }
 
@@ -211,4 +197,3 @@ p a{
 
   }
 }
-

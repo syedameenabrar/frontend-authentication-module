@@ -73,20 +73,6 @@
   margin-left: 27.5%;
 }
 
-.loginRoute {
-  color: var(--color-dark);
-  font-weight: 500;
-  font-size: 1rem;
-  margin-bottom: 10%;
-  cursor: pointer;
-  line-height: 1.563rem;
-}
-
-.loginRoute a {
-  color: var(--color-secondary);
-  cursor: pointer;
-}
-
 .error-message {
   color: var(--color-danger);
   margin-top: 0.313rem;
@@ -111,7 +97,7 @@
   font-weight: 500;
 }
 
-.haveAccountAlready {
+.have-account-already {
   color: var(--dark-color);
   font-weight: 500;
   font-size: 1rem;

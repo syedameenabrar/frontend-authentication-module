@@ -34,9 +34,8 @@
     <p *ngIf="timeLeft > 0">Try again after {{ timeLeft }} seconds.
     </p>
 
-    <p [ngClass]="{'resetBtn-disabled': timeLeft > 0}" class="loginRoute">
+    <p [ngClass]="{'reset-btn-disabled': timeLeft > 0}" class="login-route">
       <a (click)=" timeLeft <= 0 ? processOTP('generate'):false">Resend OTP</a>
     </p>
-    
   </ng-template>
 </div>
