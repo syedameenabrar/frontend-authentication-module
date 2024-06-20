@@ -40,7 +40,7 @@ export class OtpComponent {
     this.formContainer = this.renderer.selectRootElement('.login-container', true);
   }
 
-  async fetchConfigData() {
+  fetchConfigData() {
     this.endPointService.getEndpoint().pipe(
       catchError((error) => {
         alert("An error occurred while fetching configData");
