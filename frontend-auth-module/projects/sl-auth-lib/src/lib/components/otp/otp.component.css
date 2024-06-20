@@ -1,0 +1,199 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.75rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-arrow {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sign-up-button {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: var(--color-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: none;
+  text-decoration: none;
+}
+
+.login-container {
+  width: 100%;
+  background-color: var(--color-light);
+  text-align: center;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.login-container h1 {
+  font-family: var(--ion-default-font);
+  font-size: 1.575rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.25rem;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 51%;
+  margin: 0rem;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+  width: 80%;
+  padding: 0.938rem;
+  margin: 1.25rem 0rem;
+  border: 0.063rem solid var(--border-color);
+  border-radius: 2.5rem;
+  box-sizing: border-box;
+}
+
+.login-container button {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  font-weight: 700;
+  text-transform: none;
+  width: 40%;
+}
+
+.login-container button:hover {
+  background-color: var(--color-secondary);
+}
+
+.login-container button.btn-disabled {
+  background-color: var(--color-disable-bg);
+  color: var(--color-disable-text);
+}
+
+form {
+  width: 50%;
+}
+
+.login-container .hrTag {
+  background: var(--color-primary);
+  border: none;
+  height: 0.35rem;
+  margin-bottom: 5rem;
+  width: 14%;
+  text-align: left;
+  align-self: flex-start;
+  margin-left: 24.5%;
+}
+
+.login-route {
+  color: var(--color-dark);
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 10%;
+  cursor: pointer;
+  line-height: 1.563rem;
+}
+
+.login-route a {
+  color: var(--color-secondary);
+  cursor: pointer;
+}
+
+
+.error-message {
+  color: var(--color-danger);
+  margin-top: 0.313rem;
+}
+
+.t-and-c{
+  width: 100%;
+  text-align: left;
+  font-size: 0.913rem;
+  text-align: center;
+}
+
+.t-and-c a{
+  text-decoration: none;
+}
+
+.nav-content{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 85%;
+}
+
+.reset-btn-disabled a {
+  color: #585858 !important;
+}
+
+
+.terms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.terms input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.625rem;
+}
+p a{
+  color: #0000ff;
+}
+
+.note{
+  font-size: 0.75rem;
+}
+
+.ngx-otp-input-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .login-container h1 {
+      width: 90%;
+  }
+  form {
+      width: 88%;
+  }
+  .login-container .hrTag {
+      margin-bottom: 5rem;
+      width: 25%;
+      text-align: left;
+      align-self: flex-start;
+      margin-left: 5.5%;
+  }
+
+  .login-container button {
+    width: 70%;
+  }
+
+  .note{
+    font-size: large;
+    margin: 60px 0px;
+
+  }
+}

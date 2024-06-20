@@ -16,11 +16,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "paths": {
-      "sl-auth-library": [
-        "dist/sl-auth-library"
-      ]
-    },
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "target": "es2020",
     "module": "es2020",
     "lib": [
