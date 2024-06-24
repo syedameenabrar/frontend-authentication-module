@@ -1,18 +1,19 @@
-import { Component, Renderer2, inject } from '@angular/core';
-import { NgxOtpInputConfig } from "ngx-otp-input";
+import { Component, OnDestroy, OnInit, Renderer2, inject } from '@angular/core';
+import { NgxOtpInputConfig } from 'ngx-otp-input';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { StateService } from '../../services/state/state.service';
-import { Subscription, catchError, interval } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-otp',
   templateUrl: './otp.component.html',
-  styleUrl: './otp.component.css'
+  styleUrls: ['./otp.component.css']
 })
-export class OtpComponent {
+export class OtpComponent implements OnInit, OnDestroy {
   configData: any;
   endPointService: EndpointService;
   location: Location;
@@ -20,11 +21,12 @@ export class OtpComponent {
   regFormData: any;
   otp!: any;
   checkbox: boolean = false;
-
   baseApiService: ApiBaseService;
   router: Router;
   timeLeft: number = 60;
   formContainer: HTMLElement | null = null;
+  timerSubscription: Subscription | null = null;
+  fromKnownPage: boolean = false;
 
   constructor(private stateService: StateService, private renderer: Renderer2) {
     this.baseApiService = inject(ApiBaseService);
@@ -34,10 +36,17 @@ export class OtpComponent {
   }
 
   ngOnInit() {
-    this.startTimer();
-    this.regFormData = this.stateService.getData();
     this.fetchConfigData();
+    this.regFormData = this.stateService.getData();
     this.formContainer = this.renderer.selectRootElement('.login-container', true);
+    this.fromKnownPage = !!this.regFormData?.fromPage;
+    this.startTimer();
+  }
+
+  ngOnDestroy() {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
   }
 
   fetchConfigData() {
@@ -68,7 +77,7 @@ export class OtpComponent {
   }
 
   navigateBack() {
-    if (window.history.length < 1) {
+    if (this.fromKnownPage) {
       this.location.back();
     } else {
       this.router.navigate(['/landing']);
@@ -106,12 +115,6 @@ export class OtpComponent {
 
     const selectedApiPath = actionType ? apiPaths[actionType]?.[action] : "";
 
-    const redirectionPath = isSignup
-      ? this.configData?.redirectRouteOnLoginSuccess
-      : isReset
-        ? action === 'generate' ? undefined : "/login"
-        : undefined;
-
     this.baseApiService
       .post(this.configData?.baseUrl, this.configData?.[selectedApiPath], payload)
       .pipe(
@@ -123,15 +126,24 @@ export class OtpComponent {
       .subscribe(
         (res: any) => {
           alert(res?.message);
-          if (action === 'verify' && redirectionPath) {
-            this.router.navigateByUrl(redirectionPath);
+          if (action === 'verify' && res?.result) {
+              const dataToStore = {
+                accToken: res?.result?.access_token,
+                refToken: res?.result?.refresh_token,
+                ...res?.result?.user
+              };
+    
+              Object.entries(dataToStore).forEach(([key, value]) => {
+                localStorage.setItem(key, String(value));
+              });
+
+              this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
           } else if (action === 'generate') {
             this.otpInput = true;
             this.startTimer();
           } else {
-            console.error(`An error occurred during ${action} OTP`);
+            alert(res?.message || `An error occurred during ${action} OTP`);
           }
-
           if (this.formContainer) {
             this.renderer.setStyle(this.formContainer, 'top', '45%');
           }
@@ -141,9 +153,14 @@ export class OtpComponent {
 
   startTimer() {
     this.timeLeft = 60;
-    interval(1000).subscribe(() => {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+    this.timerSubscription = interval(1000).subscribe(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
+      } else if (this.timerSubscription) {
+        this.timerSubscription.unsubscribe();
       }
     });
   }
