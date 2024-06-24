@@ -155,11 +155,16 @@ export class OtpComponent implements OnInit, OnDestroy {
     this.timeLeft = 60;
     this.unsubscribeTimer();
 
-    this.timerSubscription = interval(1000).subscribe(() => {
+    this.timerSubscription = interval(1000).pipe(
+      catchError((error) => {
+        this.unsubscribeTimer();
+        throw error;
+      })
+    ).subscribe(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
-        this.unsubscribeTimer(); 
+        this.unsubscribeTimer();
       }
     });
   }
