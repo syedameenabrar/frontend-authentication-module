@@ -4,7 +4,7 @@ import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
-import { catchError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -86,6 +86,11 @@ export class LoginComponent {
         this.configData?.baseUrl,
         this.configData?.loginApiPath,
         this.formLib?.myForm.value
+      ).pipe(
+        catchError((error) => {
+          alert(error?.error?.message);
+          throw error
+        })
       )
       .subscribe(
         (res: any) => {
@@ -104,9 +109,6 @@ export class LoginComponent {
           } else {
             alert(res?.message);
           }
-        },
-        (err: any) => {
-          alert(err?.error?.message);
         }
       );
   }
