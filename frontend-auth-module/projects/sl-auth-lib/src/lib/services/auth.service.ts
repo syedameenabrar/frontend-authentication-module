@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { ApiBaseService } from './base-api/api-base.service';
 import { EndpointService } from './endpoint/endpoint.service';
+import { ToastService } from './toast/toast.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,20 +13,20 @@ export class AuthService {
   endPointService: EndpointService;
   router: Router;
   configData: any;
+  toastService: ToastService;
 
   constructor() {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
     this.fetchConfigData();
-
+    this.toastService = inject(ToastService);
   }
-
 
   async fetchConfigData() {
     this.endPointService.getEndpoint().pipe(
       catchError((error) => {
-        alert("An error occurred while fetching configData");
+        this.toastService.showToast('An error occurred while fetching configData', 'error', 3000, 'top', 'end')
         throw error
       })
     ).subscribe(data => {
@@ -54,7 +55,7 @@ export class AuthService {
         payload
       ).pipe(
         catchError((error) => {
-          alert(error?.error?.message || 'An error occurred during logout');
+          this.toastService.showToast(error?.error?.message || `An error occurred during logout`, 'error', 3000, 'top', 'end');
           throw error
         })
       )
@@ -64,7 +65,7 @@ export class AuthService {
             localStorage.clear();
             this.router.navigate(['/landing']);
           } else {
-            alert(res?.message || 'Logout unsuccessful');
+            this.toastService.showToast(res?.message || `Logout unsuccessful`, 'error', 3000, 'top', 'end');
           }
         }
       );
