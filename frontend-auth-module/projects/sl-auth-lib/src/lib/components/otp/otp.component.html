@@ -15,8 +15,7 @@
   <ng-template #otpScreen>
 
     <div class="ngx-otp-input-wrapper">
-      <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtpChange($event)"
-        (fill)="handleFillEvent($event)"></ngx-otp-input>
+        <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
     </div>
 
     <p class="note">You will receive an OTP on your registered email address.</p>

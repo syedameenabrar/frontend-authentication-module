@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2, inject } from '@angular/core';
-import { NgxOtpInputConfig } from 'ngx-otp-input';
+import { Component, OnDestroy, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { EndpointService } from '../../services/endpoint/endpoint.service';
 import { ApiBaseService } from '../../services/base-api/api-base.service';
 import { Router } from '@angular/router';
@@ -17,7 +16,7 @@ export class OtpComponent implements OnInit, OnDestroy {
   configData: any;
   endPointService: EndpointService;
   location: Location;
-  otpInput: boolean = true;
+  otpInput: boolean = false;
   regFormData: any;
   otp: string = '';
   checkbox: boolean = false;
@@ -27,6 +26,15 @@ export class OtpComponent implements OnInit, OnDestroy {
   formContainer: HTMLElement | null = null;
   timerSubscription: Subscription | null = null;
   fromKnownPage: boolean = false;
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    inputStyles: {
+      'width': '46px',
+      'height': '46px',
+      'border-radius': '8px'
+    }
+  };
 
   constructor(private stateService: StateService, private renderer: Renderer2) {
     this.baseApiService = inject(ApiBaseService);
@@ -59,26 +67,6 @@ export class OtpComponent implements OnInit, OnDestroy {
       this.configData = data;
     });
   }
-
-  otpInputConfig: NgxOtpInputConfig = {
-    otpLength: 6,
-    autofocus: true
-  };
-
-  handleOtpChange(value: string[]): void {
-    this.otp = value.join('');
-  }
-
-  handleFillEvent(value: string): void {
-    this.otp = value;
-  }
-
-  isOtpValid(): boolean {
-    return this.otp?.length === 6 && this.checkbox;
-  }
-
-
-
 
   navigateBack() {
     if (this.fromKnownPage) {
@@ -177,5 +165,17 @@ export class OtpComponent implements OnInit, OnDestroy {
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
+  }
+
+  handleFillEvent(value: string): void {
+    this.otp = value;
+  }
+  
+  onOtpChange(otp:any) {
+    this.otp = otp;
+  }
+
+  isOtpValid(): boolean {
+    return this.otp?.length === 6 && this.checkbox;
   }
 }

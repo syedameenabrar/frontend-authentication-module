@@ -7,7 +7,7 @@
     "@angular/core": "^17.3.0",
     "@angular/material": "~17.3.9",
     "elevate-dynamic-form": "^0.0.8",
-    "ngx-otp-input": "^0.11.4"
+    "ng-otp-input": "^1.9.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"
