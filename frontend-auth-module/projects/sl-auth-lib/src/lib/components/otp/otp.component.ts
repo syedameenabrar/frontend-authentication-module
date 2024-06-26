@@ -17,9 +17,9 @@ export class OtpComponent implements OnInit, OnDestroy {
   configData: any;
   endPointService: EndpointService;
   location: Location;
-  otpInput: boolean = false;
+  otpInput: boolean = true;
   regFormData: any;
-  otp!: any;
+  otp: string = '';
   checkbox: boolean = false;
   baseApiService: ApiBaseService;
   router: Router;
@@ -66,15 +66,19 @@ export class OtpComponent implements OnInit, OnDestroy {
   };
 
   handleOtpChange(value: string[]): void {
-    const otp = value.join('');
-    if (otp.length !== 6) {
-      this.otp = "";
-    }
+    this.otp = value.join('');
   }
 
   handleFillEvent(value: string): void {
     this.otp = value;
   }
+
+  isOtpValid(): boolean {
+    return this.otp?.length === 6 && this.checkbox;
+  }
+
+
+
 
   navigateBack() {
     if (this.fromKnownPage) {

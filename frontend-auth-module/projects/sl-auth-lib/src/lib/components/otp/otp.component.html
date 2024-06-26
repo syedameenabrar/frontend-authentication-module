@@ -28,7 +28,7 @@
           Service</a></p>
     </div>
 
-    <button type="button" [disabled]="!otp || !checkbox" [ngClass]="{'btn-disabled': !otp || !checkbox}"
+    <button type="button" [disabled]="!isOtpValid()" [ngClass]="{'btn-disabled': !isOtpValid()}"
       (click)="processOTP('verify')">Verify and login</button>
 
     <p *ngIf="timeLeft > 0">Try again after {{ timeLeft }} seconds.
