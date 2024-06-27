@@ -7,7 +7,7 @@ import { StateService } from '../../services/state/state.service';
 import { Subscription, interval } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ToastService } from '../../services/toast/toast.service';
-
+import { OTP_LENGTH } from '../shared/constants';
 @Component({
   selector: 'lib-otp',
   templateUrl: './otp.component.html',
@@ -179,6 +179,6 @@ export class OtpComponent implements OnInit, OnDestroy {
   }
 
   isOtpValid(): boolean {
-    return this.otp?.length === 6 && this.checkbox;
+    return this.otp?.length === OTP_LENGTH && this.checkbox;
   }
 }

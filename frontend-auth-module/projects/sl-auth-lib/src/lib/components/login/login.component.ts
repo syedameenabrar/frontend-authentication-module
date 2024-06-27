@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
 import { catchError } from 'rxjs/operators';
 import { ToastService } from '../../services/toast/toast.service';
 
-
 @Component({
   selector: 'lib-login',
   templateUrl: './login.component.html',
