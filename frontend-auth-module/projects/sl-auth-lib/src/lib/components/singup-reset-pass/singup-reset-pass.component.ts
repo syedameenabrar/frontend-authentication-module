@@ -6,6 +6,7 @@ import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
 import { StateService } from '../../services/state/state.service';
 import { catchError } from 'rxjs';
+import { ToastService } from '../../services/toast/toast.service';
 @Component({
   selector: 'lib-singup-reset-pass',
   templateUrl: './singup-reset-pass.component.html',
@@ -19,6 +20,7 @@ export class SingupResetPassComponent {
   router: Router;
   configData: any;
   location: Location;
+  toastService: ToastService;
   formJson: any = {
     controls: [
       {
@@ -89,12 +91,13 @@ export class SingupResetPassComponent {
   };
 
   constructor(private stateService: StateService, private route: ActivatedRoute
-    ,private renderer: Renderer2
+    , private renderer: Renderer2
   ) {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
     this.location = inject(Location);
+    this.toastService = inject(ToastService);
   }
 
   ngOnInit() {
@@ -108,7 +111,7 @@ export class SingupResetPassComponent {
   async fetchConfigData() {
     this.endPointService.getEndpoint().pipe(
       catchError((error) => {
-        alert("An error occurred while fetching configData");
+        this.toastService.showToast('An error occurred while fetching configData', 'error', 3000, 'top', 'end')
         throw error
       })
     ).subscribe(data => {
@@ -124,7 +127,7 @@ export class SingupResetPassComponent {
       this.stateService.setData(formData);
       this.router.navigate(['/otp']);
     } else {
-      alert("Please enter the same password");
+      this.toastService.showToast("Please enter the same password", 'error', 3000, 'top', 'end');
       console.error('Please enter the same password');
     }
   }

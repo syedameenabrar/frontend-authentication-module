@@ -1,13 +1,13 @@
 {
   "name": "authentication_frontend_library",
   "description": "In version 0.0.1 only login page with all the functionality is completed",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/material": "~17.3.9",
     "elevate-dynamic-form": "^0.0.8",
-    "ngx-otp-input": "^0.11.4"
+    "ng-otp-input": "^1.9.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"

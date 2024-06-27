@@ -15,8 +15,7 @@
   <ng-template #otpScreen>
 
     <div class="ngx-otp-input-wrapper">
-      <ngx-otp-input [config]="otpInputConfig" (otpChange)="handleOtpChange($event)"
-        (fill)="handleFillEvent($event)"></ngx-otp-input>
+        <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
     </div>
 
     <p class="note">You will receive an OTP on your registered email address.</p>
@@ -28,7 +27,7 @@
           Service</a></p>
     </div>
 
-    <button type="button" [disabled]="!otp || !checkbox" [ngClass]="{'btn-disabled': !otp || !checkbox}"
+    <button type="button" [disabled]="!isOtpValid()" [ngClass]="{'btn-disabled': !isOtpValid()}"
       (click)="processOTP('verify')">Verify and login</button>
 
     <p *ngIf="timeLeft > 0">Try again after {{ timeLeft }} seconds.

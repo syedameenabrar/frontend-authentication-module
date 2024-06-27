@@ -8,10 +8,10 @@ import { DynamicFormModule } from 'elevate-dynamic-form';
 import { LandingComponent } from './components/landing/landing.component';
 import { MatIconModule } from '@angular/material/icon';
 import { OtpComponent } from './components/otp/otp.component';
-import { NgxOtpInputModule } from "ngx-otp-input";
 import { AuthGuard } from './services/guard/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingupResetPassComponent } from './components/singup-reset-pass/singup-reset-pass.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 @NgModule({
   declarations: [
     SlAuthLibComponent,
@@ -26,9 +26,9 @@ import { SingupResetPassComponent } from './components/singup-reset-pass/singup-
     DynamicFormModule,
     HttpClientModule,
     MatIconModule,
-    NgxOtpInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgOtpInputModule
   ],
   exports: [
     SlAuthLibComponent,

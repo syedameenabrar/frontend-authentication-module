@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MainFormComponent } from 'elevate-dynamic-form';
 import { Location } from '@angular/common';
 import { catchError } from 'rxjs/operators';
-
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'lib-login',
@@ -15,11 +15,11 @@ import { catchError } from 'rxjs/operators';
 export class LoginComponent {
   @ViewChild('formLib') formLib: MainFormComponent | undefined;
   baseApiService: ApiBaseService;
-  endPointService:EndpointService;
-  router:Router;
-  configData:any;
-  location:Location;
-
+  endPointService: EndpointService;
+  router: Router;
+  configData: any;
+  location: Location;
+  toastService: ToastService;
   formJson: any = {
     controls: [
       {
@@ -29,9 +29,9 @@ export class LoginComponent {
         class: 'ion-no-margin',
         type: 'text',
         position: 'floating',
-        errorMessage:{
+        errorMessage: {
           required: "Please enter registered email ID",
-          email:"Enter a valid email ID"
+          email: "Enter a valid email ID"
         },
         validators: {
           required: true,
@@ -45,7 +45,7 @@ export class LoginComponent {
         class: 'ion-margin',
         type: 'password',
         position: 'floating',
-        errorMessage:{
+        errorMessage: {
           required: "Enter password",
           minlength: "Password should contain minimum of 8 characters"
         },
@@ -58,11 +58,12 @@ export class LoginComponent {
   };
 
 
-  constructor() { 
+  constructor() {
     this.baseApiService = inject(ApiBaseService);
     this.endPointService = inject(EndpointService);
     this.router = inject(Router);
-    this.location= inject(Location);
+    this.location = inject(Location);
+    this.toastService = inject(ToastService);
   }
 
   ngOnInit() {
@@ -72,14 +73,14 @@ export class LoginComponent {
   async fetchConfigData() {
     this.endPointService.getEndpoint().pipe(
       catchError((error) => {
-        alert("An error occurred while fetching configData");
+        this.toastService.showToast('An error occurred while fetching configData', 'error', 3000, 'top', 'end')
         throw error
       })
     ).subscribe(data => {
       this.configData = data;
     });
   }
-  
+
   submitData() {
     this.baseApiService
       .post(
@@ -88,7 +89,7 @@ export class LoginComponent {
         this.formLib?.myForm.value
       ).pipe(
         catchError((error) => {
-          alert(error?.error?.message);
+          this.toastService.showToast(error?.error?.message, 'error', 3000, 'top', 'end');
           throw error
         })
       )
@@ -100,19 +101,19 @@ export class LoginComponent {
               refToken: res?.result?.refresh_token,
               ...res?.result?.user
             };
-  
+
             Object.entries(dataToStore).forEach(([key, value]) => {
               localStorage.setItem(key, String(value));
             });
-  
+
             this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
           } else {
             alert(res?.message);
+            this.toastService.showToast(res?.message, 'error', 3000, 'top', 'end');
           }
         }
       );
   }
-  
 
   navigateBack() {
     if (window.history.length < 1) {
