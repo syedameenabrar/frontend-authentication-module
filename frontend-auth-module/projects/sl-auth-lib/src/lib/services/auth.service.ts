@@ -47,35 +47,6 @@ export class AuthService {
     return false;
   }
 
-  // logout() {
-  //   this.loggedIn = false;
-  //   const payload = {
-  //     refresh_token: localStorage?.getItem('refToken')
-  //   }
-
-  //   this.baseApiService
-  //     .post(
-  //       this.configData?.baseUrl,
-  //       this.configData?.logoutApiPath,
-  //       payload
-  //     ).pipe(
-  //       catchError((error) => {
-  //         this.toastService.showToast(error?.error?.message || `An error occurred during logout`, 'error', 3000, 'top', 'end');
-  //         throw error
-  //       })
-  //     )
-  //     .subscribe(
-  //       (res: any) => {
-  //         if (res?.responseCode === "OK") {
-  //           localStorage.clear();
-  //           this.router.navigate(['/landing']);
-  //         } else {
-  //           this.toastService.showToast(res?.message || `Logout unsuccessful`, 'error', 3000, 'top', 'end');
-  //         }
-  //       }
-  //     );
-  // }
-
   async logout() {
     const dialogRef = this.dialog.open(ModelComponent);
 
