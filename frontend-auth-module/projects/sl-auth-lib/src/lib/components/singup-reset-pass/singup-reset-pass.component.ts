@@ -31,10 +31,12 @@ export class SingupResetPassComponent {
         type: 'text',
         position: 'floating',
         errorMessage: {
-          required: "Enter Name"
+          required: "Enter Name",
+          pattern: "This field can only contain alphabets"
         },
         validators: {
-          required: true
+          required: true,
+          pattern: /^[a-zA-Z]*$/
         },
       },
       {
@@ -104,8 +106,23 @@ export class SingupResetPassComponent {
     this.mode = this.route.snapshot.data['mode'];
     if (this.mode === 'reset') {
       this.formJson.controls = this.formJson.controls.filter((control: any) => control.name !== 'name');
+      this.updateLabelsForReset();
     }
     this.fetchConfigData();
+  }
+
+  updateLabelsForReset() {
+    const passwordControl = this.formJson.controls.find((control: any) => control.name === 'password');
+    const confirmPasswordControl = this.formJson.controls.find((control: any) => control.name === 'confirm_password');
+    if (passwordControl) {
+      passwordControl.label = 'Enter new password';
+      passwordControl.errorMessage.required = 'Enter new password';
+    }
+  
+    if (confirmPasswordControl) {
+      confirmPasswordControl.label = 'Confirm new password';
+      confirmPasswordControl.errorMessage.required = 'Re-enter new password';
+    }
   }
 
   async fetchConfigData() {
