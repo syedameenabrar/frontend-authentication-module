@@ -123,18 +123,18 @@ form {
   margin-top: 0.313rem;
 }
 
-.t-and-c{
+.t-and-c {
   width: 100%;
   text-align: left;
   font-size: 0.913rem;
   text-align: center;
 }
 
-.t-and-c a{
+.t-and-c a {
   text-decoration: none;
 }
 
-.nav-content{
+.nav-content {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -157,13 +157,14 @@ form {
 .terms input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  margin-right: 0.625rem;
+  margin: 0 0.325rem 0 0.925rem;
 }
-p a{
+
+p a {
   color: #0000ff;
 }
 
-.note{
+.note {
   font-size: 0.75rem;
 }
 
@@ -174,25 +175,30 @@ p a{
 
 @media screen and (max-width: 768px) {
   .login-container h1 {
-      width: 90%;
+    width: 90%;
   }
+
   form {
-      width: 88%;
+    width: 88%;
   }
+
   .login-container .hrTag {
-      margin-bottom: 5rem;
-      width: 25%;
-      text-align: left;
-      align-self: flex-start;
-      margin-left: 5.5%;
+    margin-bottom: 3rem;
+    width: 25%;
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 5.5%;
   }
 
   .login-container button {
     width: 70%;
   }
 
-  .note{
+  .note {
     font-size: large;
-    margin: 60px 0px;
+  }
+
+  .container {
+    margin: 0px 20px;
   }
 }

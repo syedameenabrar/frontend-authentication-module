@@ -12,13 +12,16 @@ import { AuthGuard } from './services/guard/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingupResetPassComponent } from './components/singup-reset-pass/singup-reset-pass.component';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { ModelComponent } from './components/shared/component/model/model.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     SlAuthLibComponent,
     LoginComponent,
     LandingComponent,
     OtpComponent,
-    SingupResetPassComponent
+    SingupResetPassComponent,
+    ModelComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { NgOtpInputModule } from 'ng-otp-input';
     MatIconModule,
     ReactiveFormsModule,
     FormsModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    MatDialogModule
   ],
   exports: [
     SlAuthLibComponent,
