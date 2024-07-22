@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Confirm Logout</h1>
+<h1 mat-dialog-title>Logout</h1>
 <div mat-dialog-content>
   <p>Are you sure you want to logout?</p>
 </div>
 <div class="mat-dialog-actions">
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="warn" (click)="onLogout()">Logout</button>
+  <button mat-button (click)="onLogout()" class="logout-btn">Logout</button>
+  <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
 </div>
