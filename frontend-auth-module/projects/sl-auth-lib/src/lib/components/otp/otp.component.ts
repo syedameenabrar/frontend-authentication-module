@@ -25,7 +25,6 @@ export class OtpComponent implements OnInit, OnDestroy {
   toastService: ToastService;
   router: Router;
   timeLeft: number = 60;
-  formContainer: HTMLElement | null = null;
   timerSubscription: Subscription | null = null;
   fromKnownPage: boolean = false;
   config = {
@@ -49,7 +48,6 @@ export class OtpComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchConfigData();
     this.regFormData = this.stateService.getData();
-    this.formContainer = this.renderer.selectRootElement('.login-container', true);
     this.fromKnownPage = !!this.regFormData?.fromPage;
     this.startTimer();
   }
@@ -80,8 +78,8 @@ export class OtpComponent implements OnInit, OnDestroy {
   }
 
   processOTP(action: 'generate' | 'verify') {
-    const isSignup = this.regFormData.fromPage === "signup";
-    const isReset = this.regFormData.fromPage === "reset";
+    const isSignup = this.regFormData?.fromPage === "signup";
+    const isReset = this.regFormData?.fromPage === "reset";
 
     let payload = {
       email: this.regFormData?.email,
@@ -138,9 +136,6 @@ export class OtpComponent implements OnInit, OnDestroy {
             this.startTimer();
           } else {
             this.toastService.showToast(res?.message || `An error occurred during ${action} OTP`, 'error', 3000, 'top', 'end');
-          }
-          if (this.formContainer) {
-            this.renderer.setStyle(this.formContainer, 'top', '45%');
           }
         }
       );
