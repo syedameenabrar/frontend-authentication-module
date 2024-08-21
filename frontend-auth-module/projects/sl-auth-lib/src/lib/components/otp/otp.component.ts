@@ -127,7 +127,11 @@ export class OtpComponent implements OnInit, OnDestroy {
             };
 
             Object.entries(dataToStore).forEach(([key, value]) => {
-              localStorage.setItem(key, String(value));
+              if (typeof value === 'object' && value !== null) {
+                localStorage.setItem(key, JSON.stringify(value));
+              } else {
+                localStorage.setItem(key, String(value));
+              }
             });
 
             this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
