@@ -25,7 +25,7 @@ export class ApiBaseService {
     this.toast.showToast('You are offline, please connect to a network', 'error', 3000, 'top', 'end');
     return throwError(() => ({
       status: 0,
-      error: { message: 'You are offline' },
+      error: { message: 'You are offline, please connect to a network' },
     }));
   }
 
