@@ -72,6 +72,7 @@ export class AuthService {
             (res: any) => {
               if (res?.responseCode === "OK") {
                 localStorage.clear();
+                this.sendMessage();
                 this.router.navigate(['/landing']);
               } else {
                 this.toastService.showToast(res?.message || `Logout unsuccessful`, 'error', 3000, 'top', 'end');
@@ -80,6 +81,11 @@ export class AuthService {
           );
       }
     });
+  }
+
+  sendMessage() {
+    const message = { msg:'logout successful' };
+    window.postMessage(message, '*');
   }
 
   isLoggedIn(): boolean {

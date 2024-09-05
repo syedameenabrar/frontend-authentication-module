@@ -112,7 +112,6 @@ export class LoginComponent {
 
             this.router.navigateByUrl(this.configData?.redirectRouteOnLoginSuccess);
           } else {
-            alert(res?.message);
             this.toastService.showToast(res?.message, 'error', 3000, 'top', 'end');
           }
         }

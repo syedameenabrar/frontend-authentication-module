@@ -145,7 +145,6 @@ export class SingupResetPassComponent {
       this.router.navigate(['/otp']);
     } else {
       this.toastService.showToast("Please enter the same password", 'error', 3000, 'top', 'end');
-      console.error('Please enter the same password');
     }
   }
 
