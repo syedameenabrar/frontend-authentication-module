@@ -19,12 +19,11 @@ export class ApiBaseService {
     this.onlineStatus$.next(isOnline);
   }
   private isOnline(): boolean {
-    return this.onlineStatus$.value;
+    return this.onlineStatus$?.value;
   }
-  private handleOffline(): Observable<never> {
+  private handleOffline(): Observable<any> {
     this.toast.showToast('You are offline, please connect to a network', 'error', 3000, 'top', 'end');
     return throwError(() => ({
-      status: 0,
       error: { message: 'You are offline, please connect to a network' },
     }));
   }
