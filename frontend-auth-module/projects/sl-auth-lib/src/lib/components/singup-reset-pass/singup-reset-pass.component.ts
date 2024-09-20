@@ -36,7 +36,8 @@ export class SingupResetPassComponent {
         },
         validators: {
           required: true,
-          pattern: /^[a-zA-Z\s]*$/
+          pattern: /^[a-zA-Z\s]*$/,
+          maxLength:50
         },
       },
       {
