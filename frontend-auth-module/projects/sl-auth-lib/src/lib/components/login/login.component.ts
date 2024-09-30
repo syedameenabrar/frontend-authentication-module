@@ -47,11 +47,11 @@ export class LoginComponent {
         position: 'floating',
         errorMessage: {
           required: "Enter password",
-          minlength: "Password should contain minimum of 8 characters"
+          minlength: "Password should contain minimum of 10 characters"
         },
         validators: {
           required: true,
-          minLength: 8,
+          minLength: 10,
         },
       },
     ],
