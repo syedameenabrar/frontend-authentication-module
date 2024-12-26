@@ -11,9 +11,7 @@ const routes: Routes = [
   {path:'signup', component: SingupResetPassComponent,data: { mode: 'signup' }, canActivate:[AuthGuard] },
   {path:'landing', component: LandingComponent, canActivate:[AuthGuard] },
   {path:'reset-password', component: SingupResetPassComponent,data: { mode: 'reset' } , canActivate:[AuthGuard] },
-  {path:'otp', component: OtpComponent, canActivate:[AuthGuard] },
-  { path: '', redirectTo: '/landing', pathMatch: 'full' },
-  { path: '**', redirectTo: '/landing', pathMatch: 'full' }
+  {path:'otp', component: OtpComponent, canActivate:[AuthGuard] }
 ];
 
 @NgModule({
